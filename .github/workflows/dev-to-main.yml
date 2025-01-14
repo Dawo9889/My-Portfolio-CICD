@@ -32,33 +32,33 @@ jobs:
       - name: Run build
         run: npm run build
 
-  create-pr:
-    needs: build
-    runs-on: ubuntu-latest
-    if: success()
+#   create-pr:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     if: success()
 
-    steps:
-      # Checkout kodu
-      - name: Checkout code
-        uses: actions/checkout@v4
-        
-      - name: Commit changes
-        run: |
-          git add .
-          git commit -m "Automatyczny commit po zbudowaniu"
-          git push origin dev
+#     steps:
+#       # Checkout kodu
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # Tworzenie Pull Requesta z `dev` do `main`
-      - name: Create Pull Request to main
-        uses: peter-evans/create-pull-request@v7
-        with:
-          branch: dev         # PR z `dev` do `main`
-          base: main          # Docelowy branch (chroniony)
-          commit-message: 'Automated build from dev'
-          title: 'Automated PR: Sync dev with main'
-          body: |
-            This pull request was automatically created after a successful build of the `dev` branch.
-            Please review and merge it.
-          labels: |
-            automated
-            ready-for-review
+#       - name: Commit changes
+#         run: |
+#           git add .
+#           git commit -m "Automatyczny commit po zbudowaniu"
+#           git push origin dev
+
+#       # Tworzenie Pull Requesta z `dev` do `main`
+#       - name: Create Pull Request to main
+#         uses: peter-evans/create-pull-request@v7
+#         with:
+#           branch: dev         # PR z `dev` do `main`
+#           base: main          # Docelowy branch (chroniony)
+#           commit-message: 'Automated build from dev'
+#           title: 'Automated PR: Sync dev with main'
+#           body: |
+#             This pull request was automatically created after a successful build of the `dev` branch.
+#             Please review and merge it.
+#           labels: |
+#             automated
+#             ready-for-review
