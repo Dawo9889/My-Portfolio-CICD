@@ -41,6 +41,12 @@ jobs:
       # Checkout kodu
       - name: Checkout code
         uses: actions/checkout@v4
+        
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Automatyczny commit po zbudowaniu"
+          git push origin dev
 
       # Tworzenie Pull Requesta z `dev` do `main`
       - name: Create Pull Request to main
