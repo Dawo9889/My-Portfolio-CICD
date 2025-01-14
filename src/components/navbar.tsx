@@ -64,7 +64,7 @@ export function Navbar() {
           onPointerEnterCapture={undefined} 
           onPointerLeaveCapture={undefined}        
         >
-          Material Tailwind
+          Material Tailwindd
         </Typography>
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
           {NAV_MENU.map((nav) => (
