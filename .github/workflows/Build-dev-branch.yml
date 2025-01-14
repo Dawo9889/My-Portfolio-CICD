@@ -31,7 +31,8 @@ jobs:
       # Budowanie projektu
       - name: Run build
         run: npm run build
-
+      
+      # Usuwanie zmian gdy build się nie uda
       - name: Check build status and revert commit if failed
         if: failure()  
         run: |

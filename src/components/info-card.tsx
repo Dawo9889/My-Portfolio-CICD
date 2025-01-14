@@ -11,9 +11,10 @@ interface InfoCardProps {
   title: string;
   date: string;
   children: React.ReactNode;
+  githubLink?: string;
 }
 
-export function InfoCard({ icon: Icon, title, date, children }: InfoCardProps) {
+export function InfoCard({ icon: Icon, title, date, children, githubLink }: InfoCardProps) {
   return (
     <Card placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
       <CardHeader
@@ -31,6 +32,16 @@ export function InfoCard({ icon: Icon, title, date, children }: InfoCardProps) {
           <Typography color="blue-gray" variant="h5" className="w-full" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
             {title}
           </Typography>
+          {githubLink && (
+              <a
+                href={githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 underline text-sm"
+              >
+                LINK
+              </a>
+            )}
         </div>
         <IconButton
           className="flex-shrink-0 pointer-events-none"
@@ -43,7 +54,7 @@ export function InfoCard({ icon: Icon, title, date, children }: InfoCardProps) {
         </IconButton>
       </CardHeader>
       <CardBody className="grid justify-start !px-3.5 pt-2" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-        <Typography className=" font-normal !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+        <Typography className=" font-normal !text-black-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
           {children}
         </Typography>
       </CardBody>
