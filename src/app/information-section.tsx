@@ -36,6 +36,16 @@ const POJECTS= [
   },
   {
     icon: CommandLineIcon,
+    title: "Dokumentacja z początków tworzenia mojego HomeLab'a",
+    githubLink: "https://github.com/Dawo9889/HomeLab",
+    date: "2024",
+    children: 
+     "Dokumentacja zawiera wszystkie etapy tworzenia osobistego, taniego Home Laba, który na początku miał służyć tylko pod nauke, \
+      jednak po wdrożeniu okazało się to idealne narzędzie do użytku codziennego, co może ułatwić pracę wielu osobom.\
+       Przez home lab mam na myśli urządzenie czynne przez 24h/7, na którym będą uruchomione liczne usługi."
+  },
+  {
+    icon: CommandLineIcon,
     title: "App In AKS",
     githubLink: "https://github.com/Dawo9889/AppInAKS",
     date: "2024",
@@ -59,14 +69,13 @@ const POJECTS= [
   },
   {
     icon: CommandLineIcon,
-    title: "Dokumentacja z początków tworzenia mojego HomeLab'a",
-    githubLink: "https://github.com/Dawo9889/HomeLab",
+    title: "Artykuł porównujący wydajności klasyfikatorów Naive Bayes i K-Najbliższych Sąsiadów",
+    githubLink: "https://ceur-ws.org/Vol-3885/paper37.pdf",
     date: "2024",
-    children: 
-     "Dokumentacja zawiera wszystkie etapy tworzenia osobistego, taniego Home Laba, który na początku miał służyć tylko pod nauke, \
-      jednak po wdrożeniu okazało się to idealne narzędzie do użytku codziennego, co może ułatwić pracę wielu osobom.\
-       Przez home lab mam na myśli urządzenie czynne przez 24h/7, na którym będą uruchomione liczne usługi."
-  }
+    children:
+     "Artykuł miał na celu porównanie wydajności klasyfikatorów Naive Bayes i K-Najbliższych Sąsiadów."
+  },
+
 ];
 
 const EXPERIENCE = [
@@ -84,8 +93,7 @@ const EXPERIENCE = [
     children:
       "Moim głównym zadaniem jest współpraca z zespołem wdrożeniowców w celu realizacji określonych zadań związanych z rozwojem i utrzymaniem infrastruktury IT. \
        Kluczowym elementem mojej pracy jest zarządzanie kontenerami oraz ich orkiestracja. \
-       Na co dzień korzystam z takich narzędzi jak Prometheus i Grafana do monitorowania oraz analizy wydajności systemów."
-     
+       Na co dzień korzystam z takich narzędzi jak Prometheus i Grafana do monitorowania oraz analizy wydajności systemów.",
   }
 ];
 
@@ -108,10 +116,11 @@ const SKILLS = [
 const CERTIFICATES = [
   {
     icon: AcademicCapIcon,
-    title: "Time Management",
-    date: "Soft Skills",
+    title: "Program Corporate Readiness Certificate, ING Hubs",
+    date: "Technical Skills",
+    githubLink: "https://www.linkedin.com/in/galadawid/overlay/1717882932032/single-media-viewer/?type=DOCUMENT&profileId=ACoAAEX78IcBnWMfZ3oQfHKNwbBbkLLHPEDBZj8",
     children:
-      "Excellent time management skills to meet project deadlines, prioritize tasks effectively, and handle multiple projects simultaneously.",
+      "Ukazuje podejście do zabezpieczeń w firmie i w rozwiązaniach komercyjnych. Kurs miał prawie 40h, gdzie każego dnia uczyłem się czegoś nowego. Przede wszystkim dowiedziałem się jak zabezpieczyć firmę przed potencjalnymi atakami cyber.",
   }
 ];
 
@@ -197,7 +206,7 @@ export function InformationSection() {
             onPointerEnterCapture={undefined}
             onPointerLeaveCapture={undefined}
           >
-            Zobacz wszystkie moje certyfikaty.
+            Zobacz wszystkie ważniejsze w moim życiu certyfikaty.
           </Typography>
 
           <div className="mt-12 grid grid-cols-1 gap-16 gap-y-12">
