@@ -4,70 +4,89 @@ import {
   AcademicCapIcon,
   BriefcaseIcon,
   FireIcon,
+  CommandLineIcon,
 } from "@heroicons/react/24/solid";
 
 import InfoCard from "@/components/info-card";
+import { title } from "process";
+import { Children } from "react";
 
-const EDUCATION = [
+const POJECTS= [
   {
-    icon: AcademicCapIcon,
-    title: "Certified Web Developer - Web Development Institute",
-    date: "2016",
-    children:
-      "This comprehensive program covered HTML5, CSS3, JavaScript, responsive design, server-side scripting, and web security.",
+    icon: CommandLineIcon,
+    title: "Cupid App – aplikacja stworzona do robienia i zarządzania zdjęciami weselnymi.",
+    githubLink: "https://github.com/Dawo9889/IO_PROJECT_2024",
+    date: "10.2024 - 02.2025",
+    children: (
+      <>
+        Wspólny projekt z trójką znajomych mający na celu stworzenie aplikacji weselnej dostępnej zarówno na przeglądarki, jak i smartfony. 
+        Aplikacja umożliwia fotografowi dostęp do zdjęć z innej perspektywy – mianowicie, goście weselni mogą za jej pomocą robić zdjęcia 
+        i udostępniać je w czasie rzeczywistym, prezentując wydarzenie z ich punktu widzenia.
+        <br></br>
+        <br></br>
+        Moim głównym zadaniem było:
+        <ul>
+          <li> - Opracowanie aplikacji backendowej,</li>
+          <li> - Zabezpieczenie aplikacji,</li>
+          <li> - Skonteneryzowanie aplikacji za pomocą Dockera,</li>
+          <li> - Wystawienie aplikacji na serwer produkcyjny.</li>
+        </ul>
+      </>
+    ),
   },
   {
-    icon: AcademicCapIcon,
-    title: "Responsive Web Design Certification - FreeCodeCamp",
-    date: "2015",
+    icon: CommandLineIcon,
+    title: "App In AKS",
+    githubLink: "https://github.com/Dawo9889/AppInAKS",
+    date: "2024",
     children:
-      "The Responsive Web Design certification signifies competence in designing and developing websites that adapt seamlessly to various screen sizes and devices.",
+      "Aplikacja internetowa zbudowana w technologii Node.js, gdzie każdy komponent jest konteneryzowany za \
+       pomocą Dockera, co zapewnia modułowość i efektywność. Dane uwierzytelniające są bezpiecznie przechowywane \
+       w bazie danych MongoDB, co gwarantuje solidną ochronę danych. Cały system jest wdrożony na platformie Microsoft Azure, \
+       z wykorzystaniem Kubernetes, co zapewnia skalowalność, niezawodność oraz sprawną orkiestrację konteneryzowanych usług.",
   },
   {
-    icon: AcademicCapIcon,
-    title: "JavaScript Developer Certification - Code Academy",
-    date: "2014",
+    icon: CommandLineIcon,
+    title: "Aplikacja webowa do zarządzania akademikiem",
+    githubLink: "https://github.com/Dawo9889/AkademikMVC",
+    date: "2024",
     children:
-      "This certification demonstrates advanced proficiency in JavaScript programming, including ES6 features and practical applications.",
+      "Aplikacja internetowa zaprojektowana w celu ułatwienia zarządzania akademikami. \
+        Zbudowana w oparciu o ASP.NET z zastosowaniem zasad czystej architektury i wzorca MVC, zapewnia \
+        modułowość i łatwość rozwoju w przyszłości.\
+        System umożliwia kompleksowe zarządzanie mieszkańcami oraz pokojami, obejmując takie funkcje jak \
+        rejestracja nowych mieszkańców, przydzielanie miejsc w pokojach, a także monitorowanie dostępności i historii zamieszkania"
   },
   {
-    icon: AcademicCapIcon,
-    title: "Bachelor of Science in Computer Science - XYZ University",
-    date: "2014-2016",
-    children:
-      "Relevant Coursework: Data Structures, Algorithms, Web Development, Software Engineering, Database Management.",
-  },
+    icon: CommandLineIcon,
+    title: "Dokumentacja z początków tworzenia mojego HomeLab'a",
+    githubLink: "https://github.com/Dawo9889/HomeLab",
+    date: "2024",
+    children: 
+     "Dokumentacja zawiera wszystkie etapy tworzenia osobistego, taniego Home Laba, który na początku miał służyć tylko pod nauke, \
+      jednak po wdrożeniu okazało się to idealne narzędzie do użytku codziennego, co może ułatwić pracę wielu osobom.\
+       Przez home lab mam na myśli urządzenie czynne przez 24h/7, na którym będą uruchomione liczne usługi."
+  }
 ];
 
 const EXPERIENCE = [
   {
     icon: BriefcaseIcon,
-    title: "Freelancer Web Developer",
-    date: "2023 - PRESENT",
+    title: "Stażysta DevOps",
+    date: "07.2024 - 10.2024",
     children:
-      "The core of my work involved actual web development. I would write code, design layouts, and create functionality based on the project's specifications.",
+      "Moim głównym zadaniem było zapoznanie się z pracą w środowisku IT w dużej firmie. Skupiłem się na zrozumieniu przepływów pracy, współpracy z zespołami międzydziałowymi oraz poznawaniu podstawowych praktyk DevOps w praktycznym środowisku.",
   },
   {
     icon: BriefcaseIcon,
-    title: "Technical Team Lead",
-    date: "2021 - 2023",
+    title: "Pracownik DevOps",
+    date: "10.2024 - Teraz",
     children:
-      "I provided strong leadership by overseeing and guiding a team of highly skilled technical professionals.",
-  },
-  {
-    icon: BriefcaseIcon,
-    title: "Senior Web Developer",
-    date: "2017 - 2021",
-    children:
-      "Revamped the automated test framework for web services, resulting in a remarkable 90% reduction in debugging and issue resolution time.",
-  },
-  {
-    icon: BriefcaseIcon,
-    title: "Junior Web Developer",
-    date: "2015 - 2017",
-    children:
-      "Developed 10+ responsive websites for clients in a variety of industries.",
-  },
+      "Moim głównym zadaniem jest współpraca z zespołem wdrożeniowców w celu realizacji określonych zadań związanych z rozwojem i utrzymaniem infrastruktury IT. \
+       Kluczowym elementem mojej pracy jest zarządzanie kontenerami oraz ich orkiestracja. \
+       Na co dzień korzystam z takich narzędzi jak Prometheus i Grafana do monitorowania oraz analizy wydajności systemów."
+     
+  }
 ];
 
 const SKILLS = [
@@ -80,74 +99,136 @@ const SKILLS = [
   },
   {
     icon: FireIcon,
-    title: "Attention to Detail",
-    date: "Soft Skills",
-    children:
-      "Meticulous attention to detail in code quality, user interface design, and testing to ensure error-free and user-friendly web applications.",
-  },
-  {
-    icon: FireIcon,
-    title: "Responsive Web Design",
-    date: "Technical Skills",
-    children:
-      "Skilled in creating responsive layouts using CSS Grid, Flexbox, and media queries. Ensures websites adapt seamlessly to various screen sizes and devices.",
-  },
-  {
-    icon: FireIcon,
     title: "Time Management",
     date: "Soft Skills",
     children:
       "Excellent time management skills to meet project deadlines, prioritize tasks effectively, and handle multiple projects simultaneously.",
   },
 ];
+const CERTIFICATES = [
+  {
+    icon: AcademicCapIcon,
+    title: "Time Management",
+    date: "Soft Skills",
+    children:
+      "Excellent time management skills to meet project deadlines, prioritize tasks effectively, and handle multiple projects simultaneously.",
+  }
+];
 
 export function InformationSection() {
   return (
     <section className="pb-28 px-8">
-      <div className="grid xl:grid-cols-2 md:grid-cols-1 container gap-20 mx-auto items-start">
-        <div>
-          <div className="mb-10">
-            <Typography color="blue-gray" className="mb-2 text-3xl font-bold" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-              Education & Certifications
-            </Typography>
-            
-            <Typography variant="lead" className="!text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-              See my education history.
-            </Typography>
-          </div>
-          <div className="container mx-auto grid grid-cols-1 gap-16 gap-y-12">
-            {EDUCATION.map((props, idx) => (
+      <div className="container mx-auto">
+
+        {/* Projects section*/}
+        <div className="mb-16">
+          <Typography
+            color="blue-gray"
+            className="mb-2 text-3xl font-bold"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
+            Projekty
+          </Typography>
+
+          <Typography
+            variant="lead"
+            className="!text-gray-500"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
+            Wszystkie moje projekty, z których jestem zadowolny.
+          </Typography>
+
+          <div className="mt-12 grid grid-cols-1 gap-16 gap-y-12">
+            {POJECTS.map((props, idx) => (
               <InfoCard key={idx} {...props} />
             ))}
           </div>
         </div>
-        <div>
-          <div className="mb-10">
-            <Typography color="blue-gray" className="mb-2 text-3xl font-bold" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-              Experience
-            </Typography>
-            <Typography variant="lead" className="!text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-              See my experience as a developer.
-            </Typography>
-          </div>
-          <div className="container mx-auto grid grid-cols-1 gap-16 gap-y-12">
+
+        {/* EXPERIENCE Section */}
+        <div className="mb-16">
+          <Typography
+            color="blue-gray"
+            className="mb-2 text-3xl font-bold"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
+            Doświadczenie
+          </Typography>
+
+          <Typography
+            variant="lead"
+            className="!text-gray-500"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
+            Moje doświadczenie jako IT DevOps
+          </Typography>
+
+          <div className="mt-12 grid grid-cols-1 gap-16 gap-y-12">
             {EXPERIENCE.map((props, idx) => (
               <InfoCard key={idx} {...props} />
             ))}
           </div>
         </div>
-      </div>
-      <div className="container gap-20 mt-36 mx-auto items-center">
-        <div>
-          <div className="mb-10">
-            <Typography color="blue-gray" className="mb-2 text-3xl font-bold" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-              Skills
-            </Typography>
-            <Typography variant="lead" className="!text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-              Check out my technical and soft skills.
-            </Typography>
+
+      {/* Certificates section*/}
+      <div className="mb-16">
+          <Typography
+            color="blue-gray"
+            className="mb-2 text-3xl font-bold"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
+            Certyfikaty
+          </Typography>
+
+          <Typography
+            variant="lead"
+            className="!text-gray-500"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
+            Zobacz wszystkie moje certyfikaty.
+          </Typography>
+
+          <div className="mt-12 grid grid-cols-1 gap-16 gap-y-12">
+            {CERTIFICATES.map((props, idx) => (
+              <InfoCard key={idx} {...props} />
+            ))}
           </div>
-          <div className="container mx-auto grid grid-cols-1 gap-16 gap-y-12 lg:grid-cols-2">
+        </div>
+        {/* SKILLS Section */}
+        <div>
+          <Typography
+            color="blue-gray"
+            className="mb-2 text-3xl font-bold"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
+            Skills
+          </Typography>
+
+          <Typography
+            variant="lead"
+            className="!text-gray-500"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
+            Check out my technical and soft skills.
+          </Typography>
+
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 gap-y-12">
             {SKILLS.map((props, idx) => (
               <InfoCard key={idx} {...props} />
             ))}
