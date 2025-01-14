@@ -1,21 +1,48 @@
 name: Build and Create PR
 
 on:
-    push: 
-        branches:
-            - dev
+  push:
+    branches:
+      - dev
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-            # Checkout code
-            - name: Checkout code
-              uses: actions/checkout@v4
-            
-            # Set up Node.js
-            - name: Set up Node.js
-              uses: actions/setup-node@v4
-              with:
-                node-version: '16'
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run build script
+      - name: Run build
+        run: npm run build
+
+  create-pr:
+    needs: build
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Create Pull Request
+      - name: Create Pull Request to main
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: main
+          commit-message: 'Automated PR: Sync dev with main'
+          title: 'Automated PR: Sync dev with main'
+          body: 'This PR was created automatically after successful build of dev branch.'
