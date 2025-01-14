@@ -9,7 +9,7 @@ import {
 
 import InfoCard from "@/components/info-card";
 import { title } from "process";
-import { Children } from "react";
+
 
 const POJECTS= [
   {
@@ -24,13 +24,13 @@ const POJECTS= [
         i udostępniać je w czasie rzeczywistym, prezentując wydarzenie z ich punktu widzenia.
         <br></br>
         <br></br>
-        Moim głównym zadaniem było:
-        <ul>
-          <li> - Opracowanie aplikacji backendowej,</li>
-          <li> - Zabezpieczenie aplikacji,</li>
-          <li> - Skonteneryzowanie aplikacji za pomocą Dockera,</li>
-          <li> - Wystawienie aplikacji na serwer produkcyjny.</li>
-        </ul>
+        Moim głównym zadaniem było: <br></br>
+        
+          - Opracowanie aplikacji backendowej,<br></br>
+          - Zabezpieczenie aplikacji,<br></br>
+          - Skonteneryzowanie aplikacji za pomocą Dockera,<br></br>
+          - Wystawienie aplikacji na serwer produkcyjny.<br></br>
+        
       </>
     ),
   },
@@ -97,22 +97,7 @@ const EXPERIENCE = [
   }
 ];
 
-const SKILLS = [
-  {
-    icon: FireIcon,
-    title: "Front-End Frameworks",
-    date: "Technical Skills",
-    children:
-      "Competent in working with front-end frameworks such as React, Angular, or Vue.js to develop dynamic and responsive web applications with a focus on user experience.",
-  },
-  {
-    icon: FireIcon,
-    title: "Time Management",
-    date: "Soft Skills",
-    children:
-      "Excellent time management skills to meet project deadlines, prioritize tasks effectively, and handle multiple projects simultaneously.",
-  },
-];
+
 const CERTIFICATES = [
   {
     icon: AcademicCapIcon,
@@ -124,9 +109,74 @@ const CERTIFICATES = [
   }
 ];
 
+const SKILLS = [
+  {
+    icon: FireIcon,
+    title: "C#, ASP.NET, Architektura MVC",
+    date: "Technical Skills",
+    children:
+      "Technologie, które towarzyszyły mi w trakcie studiów przy tworzeniu aplikacji backendowych. Dzięki nim zdobyłem solidne podstawy w programowaniu obiektowym, zarządzaniu danymi oraz tworzeniu interfejsów API",
+  },
+  {
+    icon: FireIcon,
+    title: "Git, Github, Github Actions",
+    date: "Technical Skills",
+    children:
+      "Technologie bez których nie można się poruszać po świecie IT. Wszystkie swoje kody opieram na systemie kontroli wersji. Jako repozytorium online najcześciej wykorzystuje github.",
+  },
+  {
+    icon: FireIcon,
+    title: "Docker & Kubernetes",
+    date: "Technical Skills",
+    children:
+      "Z Dockera korzystam teraz chyba najczęściej. To na nim mam postawione wiele usług w swoim domu. Na przyklad Immich, nextcloud etc. Kubernetes jest technologią z którą mam doświadczenie, ale jeszcze dluga droga przede mną. Mogę zdradzić, że projekt mój projekt inżynierski będzie oparty głównie na tej technologii :) ",
+  },
+  {
+    icon: CommandLineIcon,
+    title: "Linux i Windows",
+    date: "Technical Skills",
+    children:
+      "Doskonale wiemy, że DevOps i linux to rzeczy wzajemnie się przyciągające. Bez znajomości tego systemu operacyjnego praca jako DevOps nie ma kompletnie sensu",
+  },
+  {
+    icon: CommandLineIcon,
+    title: "Vagrant i Ansible",
+    date: "Technical Skills",
+    children:
+      "Narzędzia ktore pomagają zautomatyzować wdrażanie na nowo systemów. Vagrant sprawia, że tworzenie nowych maszyn wirtualnych jest bardzo proste, a Ansible pomaga w ich konfigurowaniu",
+  },
+  {
+    icon: CommandLineIcon,
+    title: "Jenkins",
+    date: "Technical Skills",
+    children:
+      "Jenkins umożliwia budowanie, testowanie i wdrażanie aplikacji w sposób szybki, spójny i niezawodny. Dzięki niemu można automatycznie uruchamiać skrypty po wprowadzeniu zmian w kodzie, integrować projekty, wykrywać błędy na wczesnym etapie i przyspieszać dostarczanie oprogramowania.",
+  },
+  {
+    icon: FireIcon,
+    title: "Prometheus, Grafana, Grafana Loki",
+    date: "Technical Skills",
+    children:
+      "Prometheus, Grafana i Grafana Loki to narzędzia, które wykorzystuję do monitorowania oraz analizy systemów. Prometheus służy do zbierania i przechowywania metryk aplikacji, Grafana umożliwia wizualizację danych w postaci interaktywnych dashboardów, a Grafana Loki pozwala na efektywne gromadzenie i przeszukiwanie logów, co ułatwia diagnozowanie problemów i optymalizację działania aplikacji.",
+  },
+  {
+    icon: FireIcon,
+    title: "Azure Cloud",
+    date: "Technical Skills",
+    children:
+      "Azure używałem do tworzenia maszyn wirtualnych z pulicznym ip. Pomagało mi to na wdrażanie aplikacji, które miały być wszędzie dostępne. Mocno przydatne okazało się także AKS z gotowym load balancerem",
+  },
+  {
+    icon: AcademicCapIcon,
+    title: "Angielski, poziom C1",
+    date: "Soft Skills",
+    children: "Przede wszystkim mój angielski pomaga mi w pracy. Czytanie dokumentacji, która często jest po angielsku nie sprawia mi problemu. Troche inaczej jest z rozmową, ale dalej jest to poziom wyższy niż komunikatywny",
+  }
+];
+
 export function InformationSection() {
   return (
-    <section className="pb-28 px-8">
+    <section className="pb-6 px-8">
       <div className="container mx-auto">
 
         {/* Projects section*/}
@@ -221,10 +271,10 @@ export function InformationSection() {
             color="blue-gray"
             className="mb-2 text-3xl font-bold"
             placeholder={undefined}
-            onPointerEnterCapture={undefined}
+            onPointerEnterCapture={() => console.log('Pointer entered')}
             onPointerLeaveCapture={undefined}
           >
-            Skills
+            Umięjętności
           </Typography>
 
           <Typography
@@ -234,7 +284,7 @@ export function InformationSection() {
             onPointerEnterCapture={undefined}
             onPointerLeaveCapture={undefined}
           >
-            Check out my technical and soft skills.
+            Czyli czego nauczyłem się do tej pory
           </Typography>
 
           <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 gap-y-12">
@@ -244,6 +294,16 @@ export function InformationSection() {
           </div>
         </div>
       </div>
+      <div className="container mx-auto mt-20 text-center">
+          <Typography variant="h2" color="blue-gray" className="mb-4" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            Co robię w wolnym czasie?
+          </Typography>
+          <Typography
+            variant="lead"
+            className="mx-auto w-full px-4 font-normal !text-gray-500 lg:w-8/12" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
+            Wolny czas przede wszystkim staram się spędzać aktywnie. Dużo siedzę przed komputerem na studiach i w pracy także każdy ruch jest mi bardzo wskazany
+          </Typography>
+        </div>
     </section>
   );
 }

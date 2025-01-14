@@ -10,9 +10,9 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "NextJS Tailwind Resume Tailwind",
+  title: "Dawid Gala - Profil",
   description:
-    "Download Tailwind Resume Page a Free Landing Page Template developed by Creative Tim. Based on Tailwind CSS and Material Tailwind, see the live demo on our site and join over 2.000.000 web creatives!",
+    "Profil studenta Dawid Gala. Student, który wykorzystuje tę strone nie tylko jako swoje portfolio, ale także jako aplikacje, na której testuje swoje CI/CD",
 };
 
 export default function RootLayout({

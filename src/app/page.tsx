@@ -4,7 +4,8 @@ import { Navbar, Footer } from "@/components";
 // sections
 import Hero from "./hero";
 import InformationSection from "./information-section";
-import Testimonial from "./testimonial";
+import HobbyRower from "./HobbyRower";
+import HobbyGory from "./HobbyGory";
 
 export default function Portfolio() {
   return (
@@ -12,7 +13,8 @@ export default function Portfolio() {
       <Navbar />
       <Hero />
       <InformationSection />
-      <Testimonial />
+      <HobbyRower />
+      <HobbyGory />
       <Footer />
     </>
   );

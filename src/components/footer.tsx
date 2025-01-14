@@ -1,6 +1,6 @@
 import { Typography, Button } from "@material-tailwind/react";
 
-const LINKS = ["Home", "About Us", "Blog", "Service"];
+const LINKS = ["Home"]
 const CURRENT_YEAR = new Date().getFullYear();
 
 export function Footer() {
@@ -35,7 +35,6 @@ export function Footer() {
                 </Typography>
               </li>
             ))}
-            <Button color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>subscribe</Button>
           </ul>
         </div>
       </div>

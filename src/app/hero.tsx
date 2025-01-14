@@ -24,7 +24,7 @@ function Hero() {
 
           {/* Dodanie zdjęcia pod opisem */}
           <img
-            src="image/my-image.jpeg" 
+            src="image/my-image.jpg" 
             alt="Dawid Gala"
             className="rounded-full w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 mx-auto mb-6 object-cover"
             style={{ objectPosition: "top center" }}
@@ -35,15 +35,15 @@ function Hero() {
             Znajdziesz mnie na:
           </Typography>
           <div className="gap-2 lg:flex mb-20" >
-            <IconButton variant="text" color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            <IconButton variant="text" size = "lg" color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               <a href="https://www.linkedin.com/in/galadawid/" target="_blank" rel="noopener noreferrer">
-                <i className="fa-brands fa-linkedin text-lg" />
+                <i className="fa-brands fa-linkedin text-4xl" />
               </a>
             </IconButton>
 
-            <IconButton variant="text" color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            <IconButton variant="text" size = "lg" color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               <a href="https://github.com/Dawo9889/" target="_blank" rel="noopener noreferrer">
-                <i className="fa-brands fa-github text-lg" />
+                <i className="fa-brands fa-github text-4xl" />
               </a>
             </IconButton>
           </div>
