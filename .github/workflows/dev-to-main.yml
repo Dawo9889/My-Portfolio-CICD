@@ -14,21 +14,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
+      # Checkout kodu
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      # Setup Node.js
+      # Ustawienie Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      # Install dependencies
+      # Instalacja zależności
       - name: Install dependencies
         run: npm install
 
-      # Run build script
+      # Budowanie projektu
       - name: Run build
         run: npm run build
 
@@ -38,21 +38,16 @@ jobs:
     if: success()
 
     steps:
-      # Checkout code
+      # Checkout kodu
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Set Git user
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-        
-      # Tworzenie Pull Requesta
+      # Tworzenie Pull Requesta z `dev` do `main`
       - name: Create Pull Request to main
         uses: peter-evans/create-pull-request@v5
         with:
-          branch: dev
-          base: main
+          branch: dev         # PR z `dev` do `main`
+          base: main          # Docelowy branch (chroniony)
           commit-message: 'Automated build from dev'
           title: 'Automated PR: Sync dev with main'
           body: |
