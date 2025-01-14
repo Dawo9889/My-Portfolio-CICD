@@ -107,10 +107,11 @@ export function InformationSection() {
       <div className="grid xl:grid-cols-2 md:grid-cols-1 container gap-20 mx-auto items-start">
         <div>
           <div className="mb-10">
-            <Typography color="blue-gray" className="mb-2 text-3xl font-bold">
+            <Typography color="blue-gray" className="mb-2 text-3xl font-bold" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               Education & Certifications
             </Typography>
-            <Typography variant="lead" className="!text-gray-500">
+            
+            <Typography variant="lead" className="!text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               See my education history.
             </Typography>
           </div>
@@ -122,10 +123,10 @@ export function InformationSection() {
         </div>
         <div>
           <div className="mb-10">
-            <Typography color="blue-gray" className="mb-2 text-3xl font-bold">
+            <Typography color="blue-gray" className="mb-2 text-3xl font-bold" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               Experience
             </Typography>
-            <Typography variant="lead" className="!text-gray-500">
+            <Typography variant="lead" className="!text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               See my experience as a developer.
             </Typography>
           </div>
@@ -139,10 +140,10 @@ export function InformationSection() {
       <div className="container gap-20 mt-36 mx-auto items-center">
         <div>
           <div className="mb-10">
-            <Typography color="blue-gray" className="mb-2 text-3xl font-bold">
+            <Typography color="blue-gray" className="mb-2 text-3xl font-bold" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               Skills
             </Typography>
-            <Typography variant="lead" className="!text-gray-500">
+            <Typography variant="lead" className="!text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               Check out my technical and soft skills.
             </Typography>
           </div>

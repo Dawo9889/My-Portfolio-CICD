@@ -18,7 +18,10 @@ function NavItem({ children }: { children: React.ReactNode }) {
         href="#"
         variant="paragraph"
         color="gray"
-        className="flex items-center gap-2 font-medium text-gray-900"
+        className="flex items-center gap-2 font-medium text-gray-900" 
+        placeholder={undefined} 
+        onPointerEnterCapture={undefined} 
+        onPointerLeaveCapture={undefined}      
       >
         {children}
       </Typography>
@@ -46,15 +49,20 @@ export function Navbar() {
       blurred={false}
       shadow={false}
       color="white"
-      className="sticky top-0 z-50 border-0"
-    >
+      className="sticky top-0 z-50 border-0" 
+      placeholder={undefined} 
+      onPointerEnterCapture={undefined} 
+      onPointerLeaveCapture={undefined}    >
       <div className="container mx-auto flex items-center justify-between">
         <Typography
           as="a"
           href="https://www.material-tailwind.com"
           target="_blank"
           color="blue-gray"
-          className="text-lg font-bold"
+          className="text-lg font-bold" 
+          placeholder={undefined} 
+          onPointerEnterCapture={undefined} 
+          onPointerLeaveCapture={undefined}        
         >
           Material Tailwind
         </Typography>
@@ -64,17 +72,20 @@ export function Navbar() {
           ))}
         </ul>
         <div className="hidden items-center gap-2 lg:flex">
-          <Button variant="text">Log in</Button>
+          <Button variant="text" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>Log in</Button>
           <a href="https://www.material-tailwind.com/blocks" target="_blank">
-            <Button color="gray">blocks</Button>
+            <Button color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>blocks</Button>
           </a>
         </div>
         <IconButton
           variant="text"
           color="gray"
           onClick={handleOpen}
-          className="ml-auto inline-block lg:hidden"
-        >
+          className="ml-auto inline-block lg:hidden" 
+          placeholder={undefined} 
+          onPointerEnterCapture={undefined} 
+          onPointerLeaveCapture={undefined}        
+          >
           {open ? (
             <XMarkIcon strokeWidth={2} className="h-6 w-6" />
           ) : (
@@ -90,9 +101,9 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-6 mb-4 flex items-center gap-2">
-            <Button variant="text">Log in</Button>
+            <Button variant="text" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>Log in</Button>
             <a href="https://www.material-tailwind.com/blocks" target="_blank">
-              <Button color="gray">blocks</Button>
+              <Button color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>blocks</Button>
             </a>
           </div>
         </div>
