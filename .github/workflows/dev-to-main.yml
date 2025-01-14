@@ -5,6 +5,10 @@ on:
     branches:
       - dev
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,11 +42,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Create Pull Request
+      - name: Set Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+        
+      # Tworzenie Pull Requesta
       - name: Create Pull Request to main
         uses: peter-evans/create-pull-request@v5
         with:
           branch: main
-          commit-message: 'Automated PR: Sync dev with main'
+          commit-message: 'Automated build from dev'
           title: 'Automated PR: Sync dev with main'
-          body: 'This PR was created automatically after successful build of dev branch.'
+          body: |
+            This pull request was automatically created after a successful build of the `dev` branch.
+            Please review and merge it.
+          labels: |
+            automated
+            ready-for-review
