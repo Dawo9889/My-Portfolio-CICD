@@ -8,7 +8,7 @@ export function HobbyGory() {
   const [active, setActive] = React.useState(4);
 
   return (
-    <section className="py-4 px-8 lg:py-24">
+    <section className="py-4 px-8 lg:py-12">
       <div className="container max-w-screen-lg mx-auto">
 
         <Card color="transparent" shadow={false} className="py-8 lg:flex-row" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
@@ -28,11 +28,11 @@ export function HobbyGory() {
             </div>
 
             {/* Sekcja tekstowa po prawej */}
-            <div className="w-full mb-10 ml-10 lg:mb-0 lg:w-6/12">
+            <div className="w-full mb-10 ml-10 lg:mb-0 lg:w-8/12">
               <Typography
                 variant="h3"
                 color="blue-gray"
-                className="mb-4 font-bold lg:max-w-xs" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}              >
+                className="mb-4 font-bold lg:max-w-md" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}              >
                 2. Chodzę po górach (Beskid)
               </Typography>
               <Typography className="mb-3 w-full lg:w-8/12 font-normal !text-gray-500"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
