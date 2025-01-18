@@ -9,7 +9,7 @@ export function HobbyRower() {
   const [active, setActive] = React.useState(3);
 
   return (
-    <section className="py-4 px-8 lg:py-24">
+    <section className="py-2 px-8 lg:py-12">
       <div className="container max-w-screen-lg mx-auto">
 
         <Card color="transparent" shadow={false} className="py-8 lg:flex-row"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
