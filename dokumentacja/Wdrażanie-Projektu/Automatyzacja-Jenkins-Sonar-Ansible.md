@@ -196,36 +196,69 @@ Kod `Run ssh-keyscan inside the jenkins-blueocean container` pozwoli nam na doda
 
 Dzięki tym plikom jestem w stanie w bardzo łatwy sposób skonfigurować dowolną maszynę wirtualną. Wystarczy, że skonfiguruje ansible pod dana maszynę i wszystko robi się za mnie. 
 
+![ansible]
 
-## Jenkins i integracja z naszym repozytroim na Github
+## Konfiguracja Jenkinsa do pracy z GitHub – Dodawanie klucza SSH i tworzenie pipeline
 
 Na razie moje repozytorium jest ustawione jako prywatne, dlatego potrzebujemy skonfigurować Jenkins, aby mógł uzyskać dostęp do prywantego repozytorium.
 
-### Generowanie pary klucza
+### Aby skonfigurować Jenkinsa do pracy z prywatnym repozytorium na GitHubie, wykonaj poniższe kroki, które pozwolą Jenkinsowi uzyskać dostęp do repozytorium oraz wykrywać zmiany.
 
-Na dowolnym komputerze wyegenruj pare klucza: `ssh-keygen -t rsa -b 4096 -C "jenkins" -f /tmp/jenkins_rsa`
 
-Następnie skopiuj zawartość klucza publicznego.
+#### Generowanie pary klucza
 
-Przejdz do ustawień swojego repozytorium i doddaj ten klucz w zakładce `Deploy keys`:
+1. Na dowolnym komputerze (na którym masz dostęp do terminala) wygeneruj parę kluczy SSH:
+   ```bash
+   ssh-keygen -t rsa -b 4096 -C "jenkins" -f /tmp/jenkins_rsa
+    ```
+Parametr `-f` określa lokalizację i nazwę pliku, w którym klucz będzie zapisany. Zawartość klucza prywatnego zostanie zapisana w `/tmp/jenkins_rsa`, a klucza publicznego w `/tmp/jenkins_rsa.pub`.
 
+#### Dodanie klucza publicznego ssh do github - deploy keys
+1. Przejdź do swojego repozytorium na GitHubie.
+2. Wejdź w Settings repozytorium, a następnie w zakładkę Deploy keys.
+3. Kliknij Add deploy key.
+4. W polu Title wprowadź nazwę, np. "Jenkins SSH Key".
+5. Wklej zawartość klucza publicznego SSH, który wcześniej skopiowałeś, w pole Key.
+6. Upewnij się, że zaznaczone jest Allow write access, jeśli chcesz, by Jenkins mógł wypychać zmiany do repozytorium.
+7. Kliknij Add key.
+   
 ![github-key]
 
-Skopiuj zawartość klucza prywatnego i dodaj go jako Credential w Jenkins:
+####  Dodanie klucza prywatnego SSH do Jenkins (Credentials)
+
+1. Zaloguj się do swojego Jenkinsa.
+2. Przejdź do Manage Jenkins > Manage Credentials > (global) lub inna domena, jeśli masz taką stworzoną.
+3. Kliknij Add Credentials.
+4. Wybierz SSH Username with private key jako typ poświadczeń.
+5. W polu ID wpisz nazwę poświadczenia, np. "github-jenkins-key".
+6. W polu Username wprowadź nazwę użytkownika (zwykle jest to git).
+7. W polu Private Key wybierz opcję Enter directly, a następnie wklej zawartość klucza prywatnego (plik jenkins_rsa).
+8. Kliknij OK.
 
 ![jenkins-github-credential]
 
-Tworzymy nowy pipeline, gdzie zaznaczamy, że będzie to projekt z githuba:
+#### Tworzenie nowego pipeline w Jenkinsie
 
 **WAŻNE!!** Jako link do repozytroium dodajemy link ssh: `git@github.com:Dawo9889/My-Portfolio-CICD.git`
 ![create-pipeline]
 
-Jako że nasz Jenkins jest utworzony w lokalnej sieci, nie będziemy mogli go bezpośrednio spiąć z githubem za pomocą webhooka, ponieważ serwer githuba go nie widzi. Dlatego stworzymy `Poll SCM`, dzieki któremu Jenkins co 5minut będzie sprawdzał czy są jakieś zmiany w repozytroium
+Jako że nasz Jenkins jest utworzony w lokalnej sieci, nie będziemy mogli go bezpośrednio spiąć z githubem za pomocą webhooka, ponieważ serwer githuba go nie widzi. Dlatego stworzymy `Poll SCM`, dzieki któremu Jenkins co 5minut będzie sprawdzał czy są jakieś zmiany w repozytroium.
 
-![ansible]
+`H/5 * * * *` – Sprawdzanie repo co 5 minut.
+
+Jeżeli chodzi o nasz pipeline, to będziemy go definiować w pliku Jenkinsfile, dlatego musimy skonfigurować Jenkins do pobierania tego pliku właśnie z scm:
+
+![pipeline-scm]
+
+Jeżeli wszystko skonfigurowaliśmy poprawnie to nasz build powinien przejść pomyślnie
+
+![jenkins-success]
+
 
 [ansible]: ./media/ansible.png
 [github-key]: ./media/github-key.png
 [jenkins-github-credential]: ./media/jenkins-private-key-github.png
 [create-pipeline]: ./media/create-pipeline.png
 [trigger]: ./media/trigger.png
+[pipeline-scm]: ./media/pipeline-scm.png
+[jenkins-success]: ./media/jenkins-success.png
