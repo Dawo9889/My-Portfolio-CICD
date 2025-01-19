@@ -1,11 +1,30 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Output line') {
+    agent{
+        docker{
+            image: 'node:18'
+        }
+    }
+    stages{
+        stage('Checkout Code') {
             steps {
                 script {
-                    echo 'Hello from pipeline'
+                    checkout scm
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    sh 'npm run build'
                 }
             }
         }
