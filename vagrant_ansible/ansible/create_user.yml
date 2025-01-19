@@ -1,0 +1,25 @@
+---
+- name: Create ansible user with full access
+  hosts: all
+  become: true
+  tasks:
+    - name: Create ansible user
+      user: 
+        name: ansible_user
+        state: present
+        create_home: true
+        shell: /bin/bash
+
+    - name: Add ansible_user to sudoers with full access
+      become: true
+      lineinfile:
+        dest: /etc/sudoers
+        regexp: '^ansible_user'
+        line: 'ansible_user ALL=(ALL) NOPASSWD:ALL'
+        validate: '/usr/sbin/visudo -cf %s'
+
+    - name: Add SSH key for ansible_user
+      authorized_key:
+        user: ansible_user
+        state: present
+        key: "{{ lookup('file', '/home/dawid/.ssh/ansible_rsa.pub') }}"
