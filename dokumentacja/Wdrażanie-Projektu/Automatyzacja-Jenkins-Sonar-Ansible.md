@@ -254,6 +254,66 @@ Jeżeli wszystko skonfigurowaliśmy poprawnie to nasz build powinien przejść p
 
 ![jenkins-success]
 
+### Prosty pipeline
+
+Teraz stwórzmy pipeline, który uruchomi się na agencie docker z gotowym środowiskiem:
+
+**`Jenkinsfile`**
+```groovy
+pipeline {
+    agent {
+        docker {
+            image 'node:18'  
+        }
+    }
+    stages {
+        stage('Checkout Code') {
+            steps {
+                script {
+                    checkout scm  
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    sh 'npm install'  
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    sh 'npm run build'  
+                }
+            }
+        }
+
+        stage('Post-build') {
+            steps {
+                script {
+                    echo 'Build completed!'
+                }
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Pipeline zakończony sukcesem!'  
+        }
+        failure {
+            echo 'Pipeline zakończony błędem!'  
+        }
+    }
+}
+
+```
+
+Jest to bardzo prosty pipeline, który tylko buduje nasz kod. Dzięki niemu możemy sprawdzic czy wszystko działa tak jak należy.
+
 
 [ansible]: ./media/ansible.png
 [github-key]: ./media/github-key.png
