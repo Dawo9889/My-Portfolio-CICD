@@ -22,10 +22,33 @@
       command: docker build -t myjenkins-blueocean .
       args:
         chdir: /docker/jenkins
-    - name: Cerate jenskins external network in docker
-      ansible.builtin.command: docker network create jenkins
+
+    - name: Check if Jenkins network exists
+      shell: docker network ls --filter name=jenkins -q
+      register: network_exists
+      changed_when: false
+
+    - name: Create Jenkins external network in Docker if not exists
+      command: docker network create jenkins
+      when: network_exists.stdout == ""
         
     - name: Start Jenkins container using docker-compose
       command: docker compose up -d
       args:
         chdir: /docker/jenkins
+
+
+    - name: Create directory for sonarqube Docker setup
+      file:
+        path: /docker/sonarqube
+        state: directory
+
+    - name: Copy docker-compose.yml to create sonarqube
+      copy:
+        src: ./files/docker-compose-sonar.yml
+        dest: /docker/sonarqube/docker-compose.yml
+
+    - name: Start Sonarqbue container using docker-compose
+      command: docker compose up -d
+      args:
+        chdir: /docker/sonarqube
