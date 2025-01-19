@@ -196,6 +196,36 @@ Kod `Run ssh-keyscan inside the jenkins-blueocean container` pozwoli nam na doda
 
 Dzięki tym plikom jestem w stanie w bardzo łatwy sposób skonfigurować dowolną maszynę wirtualną. Wystarczy, że skonfiguruje ansible pod dana maszynę i wszystko robi się za mnie. 
 
+
+## Jenkins i integracja z naszym repozytroim na Github
+
+Na razie moje repozytorium jest ustawione jako prywatne, dlatego potrzebujemy skonfigurować Jenkins, aby mógł uzyskać dostęp do prywantego repozytorium.
+
+### Generowanie pary klucza
+
+Na dowolnym komputerze wyegenruj pare klucza: `ssh-keygen -t rsa -b 4096 -C "jenkins" -f /tmp/jenkins_rsa`
+
+Następnie skopiuj zawartość klucza publicznego.
+
+Przejdz do ustawień swojego repozytorium i doddaj ten klucz w zakładce `Deploy keys`:
+
+![github-key]
+
+Skopiuj zawartość klucza prywatnego i dodaj go jako Credential w Jenkins:
+
+![jenkins-github-credential]
+
+Tworzymy nowy pipeline, gdzie zaznaczamy, że będzie to projekt z githuba:
+
+**WAŻNE!!** Jako link do repozytroium dodajemy link ssh: `git@github.com:Dawo9889/My-Portfolio-CICD.git`
+![create-pipeline]
+
+Jako że nasz Jenkins jest utworzony w lokalnej sieci, nie będziemy mogli go bezpośrednio spiąć z githubem za pomocą webhooka, ponieważ serwer githuba go nie widzi. Dlatego stworzymy `Poll SCM`, dzieki któremu Jenkins co 5minut będzie sprawdzał czy są jakieś zmiany w repozytroium
+
 ![ansible]
 
 [ansible]: ./media/ansible.png
+[github-key]: ./media/github-key.png
+[jenkins-github-credential]: ./media/jenkins-private-key-github.png
+[create-pipeline]: ./media/create-pipeline.png
+[trigger]: ./media/trigger.png
