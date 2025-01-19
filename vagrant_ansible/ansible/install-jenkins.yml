@@ -1,0 +1,31 @@
+---
+- name: Install Jenkins using Docker and Docker Compose
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create directory for Jenkins Docker setup
+      file:
+        path: /docker/jenkins
+        state: directory
+    
+    - name: Copy Dockerfile to the remote server with a new name
+      copy:
+        src: ./files/Dockerfile-jenkins
+        dest: /docker/jenkins/Dockerfile
+
+    - name: Copy docker-compose.yml to create Jenkins
+      copy:
+        src: ./files/docker-compose-jenkins.yml
+        dest: /docker/jenkins/docker-compose.yml
+
+    - name: Build Docker image from Dockerfile
+      command: docker build -t myjenkins-blueocean .
+      args:
+        chdir: /docker/jenkins
+    - name: Cerate jenskins external network in docker
+      ansible.builtin.command: docker network create jenkins
+        
+    - name: Start Jenkins container using docker-compose
+      command: docker compose up -d
+      args:
+        chdir: /docker/jenkins
