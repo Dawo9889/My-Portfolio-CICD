@@ -1,13 +1,15 @@
-pipeline{
+pipeline {
     agent any
-    triggers{
-        gitHubPush();
+    triggers {
+        githubPush() // Użycie funkcji githubPush() do triggerowania na push
     }
-    
-    stages{
-        stage('Output line'){
-            script{
-                echo 'Hello from pipeline'
+
+    stages {
+        stage('Output line') {
+            steps {
+                script {
+                    echo 'Hello from pipeline'
+                }
             }
         }
     }

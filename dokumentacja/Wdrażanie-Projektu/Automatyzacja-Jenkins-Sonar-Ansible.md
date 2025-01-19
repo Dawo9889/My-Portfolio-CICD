@@ -171,7 +171,11 @@ Tutaj wykorzystujemy równiez pliki z folderu `/files`
       args:
         chdir: /docker/jenkins
 
-
+    - name: Run ssh-keyscan inside the jenkins-blueocean container
+      command: docker exec jenkins-blueocean sh -c "ssh-keyscan github.com >> ~/.ssh/known_hosts"
+      args:
+        chdir: /docker/jenkins
+      
     - name: Create directory for sonarqube Docker setup
       file:
         path: /docker/sonarqube
@@ -188,6 +192,7 @@ Tutaj wykorzystujemy równiez pliki z folderu `/files`
         chdir: /docker/sonarqube
 ```
 
+Kod `Run ssh-keyscan inside the jenkins-blueocean container` pozwoli nam na dodanie zaufanego połaczenia ssh dla github, który przyda nam się później.
 
 Dzięki tym plikom jestem w stanie w bardzo łatwy sposób skonfigurować dowolną maszynę wirtualną. Wystarczy, że skonfiguruje ansible pod dana maszynę i wszystko robi się za mnie. 
 
