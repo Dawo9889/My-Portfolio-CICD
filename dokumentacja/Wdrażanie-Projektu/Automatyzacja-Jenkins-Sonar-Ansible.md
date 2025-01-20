@@ -438,6 +438,62 @@ stage('Check Quality Gate') {
         }
 ```
 
+## Budowanie i wypychanie obrazu kontenera do prywatnego repozytorium
+
+W procesie CI/CD kluczową rolę odgrywa również część CD – Continuous Delivery (ciągła dostawa), która jest fundamentem zautomatyzowanego wdrażania. Bez tego elementu cały proces nie jest w pełni zautomatyzowany.
+
+Po zakończeniu etapów, w których pipeline weryfikuje poprawność naszego kodu, przechodzimy do kolejnego kroku, jakim jest budowanie obrazu kontenera oraz wypchnięcie go do repozytorium. Do tego celu wykorzystamy Docker Hub – popularne repozytorium dla obrazów kontenerowych.
+
+Przede wszystkim przygotujmy naszą infrastrukturę do tego zadania:
+1. Stwórzmy access token w docker hub:
+   ![docker-token]
+2. Aby Jenkins mógł uzyskać dostęp do naszego repozytorium na Docker Hub, musimy dodać odpowiednie dane uwierzytelniające jako poufne zmienne. W tym przypadku, jako nazwę użytkownika podajemy nasze konto na Docker Hub, a jako hasło – token dostępu.
+   ![jenkins-docker-cred]
+
+3. W naszym pipeline dodajemy etap, który będzie odpowiedzialny za budowanie obrazu kontenera oraz wypychanie go do naszego repozytorium na Docker Hub. Etap ten zostanie uruchomiony tylko wtedy, gdy wszystkie poprzednie etapy pipeline zakończą się powodzeniem, co zapewnia odpowiednią kontrolę nad jakością kodu przed utworzeniem obrazu.
+   ```groovy
+
+    environment {
+        DOCKER_IMAGE = 'baitazar/my-portfolio-app'  
+        DOCKER_TAG = 'latest'
+        DOCKER_REGISTRY = 'registry.hub.docker.com' 
+    }
+
+           stage('Building and pushing container image') {
+            agent any
+            when {
+                allOf {
+                    expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS'  
+                    }
+                }
+            }
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-access-token', 
+                                           usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', 
+                                           passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
+                        
+                        sh """
+                            docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}
+                            docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+                            docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
+                        """
+                    }
+                }
+            }
+        }
+   ```
+**Warunek** `when`: Etap ten uruchomi się tylko wtedy, gdy wszystkie poprzednie etapy pipeline zakończą się sukcesem (sprawdzamy, czy currentBuild.result == null || currentBuild.result == 'SUCCESS').
+
+**Zalogowanie do Docker Hub**
+`withCredentials`: Zmienna środowiskowa `DOCKERHUB_CREDENTIALS_USR` i `DOCKERHUB_CREDENTIALS_PSW` zawierają dane uwierzytelniające do Docker Hub, które wcześniej zapisaliśmy jako poufne zmienne w Jenkinsie.
+
+**docker login**: Komenda logowania do Docker Hub przy użyciu wcześniej wczytanych zmiennych (`DOCKERHUB_CREDENTIALS_USR` i `DOCKERHUB_CREDENTIALS_PSW`).
+
+Gdy wszystko mamy skonfigurowane tak jak należy to na naszym repozytorium powinien pojawić się obraz:
+![docker-hub-image]
+
 [ansible]: ./media/ansible.png
 [github-key]: ./media/github-key.png
 [jenkins-github-credential]: ./media/jenkins-private-key-github.png
@@ -450,3 +506,7 @@ stage('Check Quality Gate') {
 [sonar-first-analysis]: ./media/sonar-first-analysis.png
 [sonar-issues]: ./media/sonar-issue-user.png
 [sonar-fixed]: ./media/sonar-fixed.png
+
+[docker-token]: ./media/docker-token.png
+[jenkins-docker-cred]: ./media/jenkins-docker-cred.png
+[docker-hub-image]: ./media/docker-hub-image.png
