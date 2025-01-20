@@ -29,7 +29,7 @@ pipeline {
             }
         }
 
-        stage{
+        stage('Analyze code with sonarqube'){
             steps{
                 def scannerHome = tool 'sonar-scanner'
 
@@ -37,7 +37,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'sonarqube-my-portfolio-token', variable: 'SONAR_TOKEN')]){
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey=test_sonar \
+                            -Dsonar.projectKey=my-portfolio \
                             -Dsonar.sources=. \
                             -Dsonar.login=${SONAR_TOKEN}
                             """
