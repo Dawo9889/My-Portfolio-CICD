@@ -85,6 +85,7 @@ pipeline {
         }
 
         stage('Building and pushing container image') {
+            agent any
             when {
                 allOf {
                     expression {
