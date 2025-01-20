@@ -2,9 +2,10 @@ pipeline {
     agent none 
 
     environment {
-        DOCKER_IMAGE = 'baitazar/my-portfolio-app'
-        REGISTRY_CREDENTIALS = 'docker-hub-access-token'  
-        DOCKER_REGISTRY = 'docker.io'  
+        DOCKER_IMAGE = 'baitazar/my-portfolio-app'  
+        DOCKER_TAG = 'latest'
+        REGISTRY_CREDENTIALS = 'docker-hub-access-token' 
+        DOCKER_REGISTRY = 'docker.io' 
     }
 
     stages {
@@ -16,7 +17,7 @@ pipeline {
             }
             steps {
                 script {
-                    checkout scm  
+                    checkout scm
                 }
             }
         }
@@ -45,17 +46,17 @@ pipeline {
             steps {
                 script {
                     dir('./app') {
-                        sh 'npm run build'
+                        sh 'npm run build' 
                     }
                 }
             }
         }
 
-        stage('Analyze code with sonarqube') {
+        stage('Analyze code with SonarQube') {
             agent any
             steps {
                 script {
-                    def scannerHome = tool 'sonar-scanner'
+                    def scannerHome = tool 'sonar-scanner' 
 
                     withSonarQubeEnv('sonarqube-server') {
                         withCredentials([string(credentialsId: 'sonarqube-my-portfolio-token', variable: 'SONAR_TOKEN')]) {
@@ -64,7 +65,7 @@ pipeline {
                                     ${scannerHome}/bin/sonar-scanner \
                                     -Dsonar.projectKey=my-portfolio \
                                     -Dsonar.sources=. \
-                                    -Dsonar.login=${SONAR_TOKEN}
+                                    -Dsonar.login=${SONAR_TOKEN}  // Przekazanie tokena do SonarQube
                                 """
                             }
                         }
@@ -78,7 +79,7 @@ pipeline {
             steps {
                 script {
                     timeout(time: 5, unit: 'MINUTES') {
-                        waitForQualityGate abortPipeline: true
+                        waitForQualityGate abortPipeline: true 
                     }
                 }
             }
@@ -93,31 +94,35 @@ pipeline {
             }
             steps {
                 script {
-                    sh """
-                        docker build -t $DOCKER_IMAGE:latest ./app'
-                    """
+                    node {
+                        sh """
+                            docker build -t $DOCKER_REGISTRY/$DOCKER_IMAGE:$DOCKER_TAG ./app  
+                        """
+                    }
                 }
             }
         }
 
         stage('Push Docker Image') {
+            agent any
             steps {
                 script {
-                    withDockerRegistry([credentialsId: REGISTRY_CREDENTIALS, url: DOCKER_REGISTRY]) {
-                        sh """
-                            docker push $DOCKER_REGISTRY/$DOCKER_IMAGE:$DOCKER_TAG
-                        """
+                    node {
+                        withDockerRegistry([credentialsId: REGISTRY_CREDENTIALS, url: DOCKER_REGISTRY]) {
+                            sh """
+                                docker push $DOCKER_REGISTRY/$DOCKER_IMAGE:$DOCKER_TAG  
+                            """
+                        }
                     }
                 }
             }
-
         }
 
         stage('Post-build') {
             agent any
             steps {
                 script {
-                    echo 'Build completed!'
+                    echo 'Build completed!' 
                 }
             }
         }
@@ -125,10 +130,10 @@ pipeline {
     
     post {
         success {
-            echo 'Pipeline zakończony sukcesem!'  
+            echo 'Pipeline zakończony sukcesem!'
         }
         failure {
-            echo 'Pipeline zakończony błędem!'  
+            echo 'Pipeline zakończony błędem!' 
         }
     }
 }
