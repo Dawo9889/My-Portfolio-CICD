@@ -2,8 +2,8 @@ pipeline {
     agent none 
     stages {
         stage('Checkout Code') {
-            agent{
-                docker{
+            agent {
+                docker {
                     image 'node:18'
                 }
             }
@@ -15,49 +15,54 @@ pipeline {
         }
 
         stage('Install Dependencies') {
-            agent{
-                docker{
+            agent {
+                docker {
                     image 'node:18'
                 }
             }
             steps {
                 script {
-                    sh 'npm install'  
+                    dir('./app') {
+                        sh 'npm install'
+                    }
                 }
             }
         }
 
         stage('Build') {
-            agent{
-                docker{
+            agent {
+                docker {
                     image 'node:18'
                 }
             }
             steps {
                 script {
-                    sh 'npm run build'  
+                    dir('./app') {
+                        sh 'npm run build'
+                    }
                 }
             }
         }
 
-        stage('Analyze code with sonarqube'){
+        stage('Analyze code with sonarqube') {
             agent any
-            steps{
-                script{
+            steps {
+                script {
                     def scannerHome = tool 'sonar-scanner'
 
-                    withSonarQubeEnv('sonarqube-server'){
-                        withCredentials([string(credentialsId: 'sonarqube-my-portfolio-token', variable: 'SONAR_TOKEN')]){
-                            sh """
-                                ${scannerHome}/bin/sonar-scanner \
-                                -Dsonar.projectKey=my-portfolio \
-                                -Dsonar.sources=. \
-                                -Dsonar.login=${SONAR_TOKEN}
+                    withSonarQubeEnv('sonarqube-server') {
+                        withCredentials([string(credentialsId: 'sonarqube-my-portfolio-token', variable: 'SONAR_TOKEN')]) {
+                            dir('./app') {
+                                sh """
+                                    ${scannerHome}/bin/sonar-scanner \
+                                    -Dsonar.projectKey=my-portfolio \
+                                    -Dsonar.sources=. \
+                                    -Dsonar.login=${SONAR_TOKEN}
                                 """
+                            }
                         }
                     }
                 }
-                
             }
         }
 
