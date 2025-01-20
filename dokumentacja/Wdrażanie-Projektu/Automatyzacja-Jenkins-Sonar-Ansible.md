@@ -318,6 +318,126 @@ Jest to bardzo prosty pipeline, który tylko buduje nasz kod. Dzięki niemu moż
 
 Po więcej informacji zapraszam: [Instalacja Jenkins i SonarQube](../Instalacja-Jenkins-SonarQube/Jenkins-i-SonarQube.md) - Tu zająłem się szczegółowym opisem kroków, które tutaj podejmę. 
 
+Po konfiguracji możemy utworzyć stage pod analize kody, jeżeli wszystko mamy dobrze, to powinna pojawić się nam analiza w sonarqube.
+Jednoczesnie zmieniłem plik Jenkinsfile, ponieważ w międzyczasie moja struktura projektu przeszła restrukturyzacje. Zauważyłem że kopiuje wszystko do kontenera, co też sonarqube zauwazył.
+
+```groovy
+pipeline {
+    agent none 
+    stages {
+        stage('Checkout Code') {
+            agent {
+                docker {
+                    image 'node:18'
+                }
+            }
+            steps {
+                script {
+                    checkout scm  
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            agent {
+                docker {
+                    image 'node:18'
+                }
+            }
+            steps {
+                script {
+                    dir('./app') {
+                        sh 'npm install'
+                    }
+                }
+            }
+        }
+
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:18'
+                }
+            }
+            steps {
+                script {
+                    dir('./app') {
+                        sh 'npm run build'
+                    }
+                }
+            }
+        }
+
+        stage('Analyze code with sonarqube') {
+            agent any
+            steps {
+                script {
+                    def scannerHome = tool 'sonar-scanner'
+
+                    withSonarQubeEnv('sonarqube-server') {
+                        withCredentials([string(credentialsId: 'sonarqube-my-portfolio-token', variable: 'SONAR_TOKEN')]) {
+                            dir('./app') {
+                                sh """
+                                    ${scannerHome}/bin/sonar-scanner \
+                                    -Dsonar.projectKey=my-portfolio \
+                                    -Dsonar.sources=. \
+                                    -Dsonar.login=${SONAR_TOKEN}
+                                """
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Post-build') {
+            agent any
+            steps {
+                script {
+                    echo 'Build completed!'
+                }
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Pipeline zakończony sukcesem!'  
+        }
+        failure {
+            echo 'Pipeline zakończony błędem!'  
+        }
+    }
+}
+
+```
+
+Sonarqube wskaujze nam na przykład taki bład: 
+
+![sonar-issues]
+
+Co sugeruje nam, że kontener jest uruchamiany z użyykownikiem root, żeby to naprawić musimy okreslić uzytkownika, który będzie uruchamiany w kontenerze. Aby to zrobić wystarczu do pliku `Dockerfile` dodać na przykład `User nodejs`. 
+
+Teraz gdy ponownie uruchomimy pipeline i wykona sie skan, wszystko jest już jako pozytywne:
+
+![sonar-fixed]
+
+
+Na razie nasza analiza kodu nie wpływa na wynik wykonania się Pipeline'u. Aby to zmienić wystraczy dodać kod do Jenkinsfile, który będzie czekał na wynik analizy.
+
+```groovy
+stage('Check Quality Gate') {
+            agent any
+            steps {
+                script {
+                    timeout(time: 5, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
+                    }
+                }
+            }
+        }
+```
+
 [ansible]: ./media/ansible.png
 [github-key]: ./media/github-key.png
 [jenkins-github-credential]: ./media/jenkins-private-key-github.png
@@ -326,3 +446,7 @@ Po więcej informacji zapraszam: [Instalacja Jenkins i SonarQube](../Instalacja-
 [pipeline-scm]: ./media/pipeline-scm.png
 [jenkins-success]: ./media/jenkins-success.png
 [jenkins-add-sonar-server]: ./media/jenkins-add-sonar-server.png
+
+[sonar-first-analysis]: ./media/sonar-first-analysis.png
+[sonar-issues]: ./media/sonar-issue-user.png
+[sonar-fixed]: ./media/sonar-fixed.png

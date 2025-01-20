@@ -66,6 +66,17 @@ pipeline {
             }
         }
 
+        stage('Check Quality Gate') {
+            agent any
+            steps {
+                script {
+                    timeout(time: 5, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
+                    }
+                }
+            }
+        }
+
         stage('Post-build') {
             agent any
             steps {
