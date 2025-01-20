@@ -94,10 +94,12 @@ pipeline {
             }
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'docker-hub-access-token', variable: 'DOCKERHUB_CREDENTIALS')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-access-token', 
+                                           usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', 
+                                           passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
                         
                         sh """
-                            docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}
+                            docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}
                             docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
                             docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
                         """
