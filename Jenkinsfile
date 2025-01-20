@@ -65,7 +65,7 @@ pipeline {
                                     ${scannerHome}/bin/sonar-scanner \
                                     -Dsonar.projectKey=my-portfolio \
                                     -Dsonar.sources=. \
-                                    -Dsonar.login=${SONAR_TOKEN}  // Przekazanie tokena do SonarQube
+                                    -Dsonar.login=${SONAR_TOKEN}  
                                 """
                             }
                         }
