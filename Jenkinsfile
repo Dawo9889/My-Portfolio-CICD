@@ -1,11 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18'  
-        }
-    }
+    agent none 
     stages {
         stage('Checkout Code') {
+            agent{
+                docker{
+                    image 'node:18'
+                }
+            }
             steps {
                 script {
                     checkout scm  
@@ -14,6 +15,11 @@ pipeline {
         }
 
         stage('Install Dependencies') {
+            agent{
+                docker{
+                    image 'node:18'
+                }
+            }
             steps {
                 script {
                     sh 'npm install'  
@@ -22,6 +28,11 @@ pipeline {
         }
 
         stage('Build') {
+            agent{
+                docker{
+                    image 'node:18'
+                }
+            }
             steps {
                 script {
                     sh 'npm run build'  
@@ -30,6 +41,7 @@ pipeline {
         }
 
         stage('Analyze code with sonarqube'){
+            agent any
             steps{
                 script{
                     def scannerHome = tool 'sonar-scanner'
@@ -50,6 +62,7 @@ pipeline {
         }
 
         stage('Post-build') {
+            agent any
             steps {
                 script {
                     echo 'Build completed!'
