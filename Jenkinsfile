@@ -1,5 +1,12 @@
 pipeline {
     agent none 
+
+    environment {
+        DOCKER_IMAGE = 'baitazar/my-portfolio-app'
+        REGISTRY_CREDENTIALS = 'docker-hub-access-token'  
+        DOCKER_REGISTRY = 'docker.io'  
+    }
+
     stages {
         stage('Checkout Code') {
             agent {
@@ -75,6 +82,35 @@ pipeline {
                     }
                 }
             }
+        }
+
+        stage('Build Docker Image') {
+            agent any
+            when {
+                expression {
+                    return currentBuild.result == 'SUCCESS'  
+                }
+            }
+            steps {
+                script {
+                    sh """
+                        docker build -t $DOCKER_IMAGE:latest ./app'
+                    """
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    withDockerRegistry([credentialsId: REGISTRY_CREDENTIALS, url: DOCKER_REGISTRY]) {
+                        sh """
+                            docker push $DOCKER_REGISTRY/$DOCKER_IMAGE:$DOCKER_TAG
+                        """
+                    }
+                }
+            }
+
         }
 
         stage('Post-build') {
