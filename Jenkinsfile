@@ -29,6 +29,23 @@ pipeline {
             }
         }
 
+        stage{
+            steps{
+                def scannerHome = tool 'sonar-scanner'
+
+                withSonarQubeEnv('sonarqube-server'){
+                    withCredentials([string(credentialsId: 'sonarqube-my-portfolio-token', variable: 'SONAR_TOKEN')]){
+                        sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=test_sonar \
+                            -Dsonar.sources=. \
+                            -Dsonar.login=${SONAR_TOKEN}
+                            """
+                    }
+                }
+            }
+        }
+
         stage('Post-build') {
             steps {
                 script {

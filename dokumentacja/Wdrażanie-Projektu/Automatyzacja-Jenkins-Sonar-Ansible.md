@@ -314,6 +314,9 @@ pipeline {
 
 Jest to bardzo prosty pipeline, który tylko buduje nasz kod. Dzięki niemu możemy sprawdzic czy wszystko działa tak jak należy.
 
+## Integracja Jenkins z Sonarqbue
+
+Po więcej informacji zapraszam: [Instalacja Jenkins i SonarQube](../Instalacja-Jenkins-SonarQube/Jenkins-i-SonarQube.md) - Tu zająłem się szczegółowym opisem kroków, które tutaj podejmę. 
 
 [ansible]: ./media/ansible.png
 [github-key]: ./media/github-key.png
@@ -322,3 +325,4 @@ Jest to bardzo prosty pipeline, który tylko buduje nasz kod. Dzięki niemu moż
 [trigger]: ./media/trigger.png
 [pipeline-scm]: ./media/pipeline-scm.png
 [jenkins-success]: ./media/jenkins-success.png
+[jenkins-add-sonar-server]: ./media/jenkins-add-sonar-server.png

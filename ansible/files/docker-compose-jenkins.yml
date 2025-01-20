@@ -3,6 +3,7 @@ services:
     image: docker:dind
     container_name: jenkins-docker
     privileged: true
+    restart: unless-stopped
     environment:
       DOCKER_TLS_CERTDIR: "/certs"
     networks:
@@ -19,7 +20,7 @@ services:
   jenkins:
     image: myjenkins-blueocean
     container_name: jenkins-blueocean
-    restart: on-failure
+    restart: unless-stopped
     environment:
       DOCKER_HOST: "tcp://docker:2376"
       DOCKER_CERT_PATH: "/certs/client"
