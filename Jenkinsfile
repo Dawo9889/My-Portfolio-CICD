@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE = 'baitazar/my-portfolio-app'  
         DOCKER_TAG = 'latest'
         REGISTRY_CREDENTIALS = 'docker-hub-access-token' 
-        DOCKER_REGISTRY = 'docker.io' 
+        DOCKER_REGISTRY = 'registry.hub.docker.com' 
     }
 
     stages {
@@ -65,7 +65,7 @@ pipeline {
                                     ${scannerHome}/bin/sonar-scanner \
                                     -Dsonar.projectKey=my-portfolio \
                                     -Dsonar.sources=. \
-                                    -Dsonar.login=${SONAR_TOKEN}  // Przekazanie tokena do SonarQube
+                                    -Dsonar.login=${SONAR_TOKEN}  
                                 """
                             }
                         }
