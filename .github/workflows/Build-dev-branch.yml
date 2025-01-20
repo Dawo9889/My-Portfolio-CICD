@@ -27,15 +27,10 @@ jobs:
     # Instalacja zależności
     - name: Install dependencies
       run: npm install
+      working-directory: ./app
 
     # Budowanie projektu
     - name: Run build
       run: npm run build
+      working-directory: ./app
 
-    # Usuwanie zmian gdy build się nie uda
-    - name: Check build status and revert commit if failed
-      if: failure()
-      run: |
-        echo "Build failed, reverting commit..."
-        git reset --hard HEAD~1  
-        git push origin dev --force 
