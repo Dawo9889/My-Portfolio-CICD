@@ -12,6 +12,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:18'
+                    network 'host'
                 }
             }
             steps {
@@ -25,6 +26,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:18'
+                    network 'host'
                 }
             }
             steps {
