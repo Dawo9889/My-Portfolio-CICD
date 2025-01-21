@@ -1,10 +1,12 @@
 FROM node:18-alpine AS build
 
+RUN apk add --no-cache libc6-compat
+
 WORKDIR /app
 
 COPY ./app/package*.json ./
 
-RUN npm install
+RUN npm update && npm install
 
 COPY ./app/ ./
 
