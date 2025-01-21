@@ -12,7 +12,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:18'
-                    network 'host'
+                    args '--network host'
                 }
             }
             steps {
@@ -26,7 +26,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:18'
-                    network 'host'
+                    args '--network host'
                 }
             }
             steps {
@@ -42,6 +42,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:18'
+                    args '--network host'
                 }
             }
             steps {
