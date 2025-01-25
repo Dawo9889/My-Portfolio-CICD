@@ -101,7 +101,7 @@ pipeline {
                                            passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
                         
                         sh """
-                            docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}
+                            echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
                             docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
                             docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
                         """
