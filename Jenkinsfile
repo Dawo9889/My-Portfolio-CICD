@@ -137,7 +137,7 @@ pipeline {
                                 # Uruchomienie nowego kontenera
                                 docker run -d --name my-portfolio-app -p 4500:3000 ${DOCKER_IMAGE}:${DOCKER_TAG}
 
-                                EOF
+                                
                             '''
                         }
                     }
