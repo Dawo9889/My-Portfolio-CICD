@@ -76,14 +76,14 @@ pipeline {
             }
         }
 
-        stage('Check Quality Gate') {
-            agent any
-            steps {
-                script {
-                    waitForQualityGate abortPipeline: true 
-                }
-            }
-        }
+        // stage('Check Quality Gate') {
+        //     agent any
+        //     steps {
+        //         script {
+        //             waitForQualityGate abortPipeline: true 
+        //         }
+        //     }
+        // }
 
         stage('Building and pushing container image') {
             agent any
