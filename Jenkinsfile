@@ -22,93 +22,93 @@ pipeline {
             }
         }
 
-        // stage('Install Dependencies') {
-        //     agent {
-        //         docker {
-        //             image 'node:18'
-        //             args '--network host'
-        //         }
-        //     }
-        //     steps {
-        //         script {
-        //             dir('./app') {
-        //                 sh 'npm install'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Install Dependencies') {
+            agent {
+                docker {
+                    image 'node:18'
+                    args '--network host'
+                }
+            }
+            steps {
+                script {
+                    dir('./app') {
+                        sh 'npm install'
+                    }
+                }
+            }
+        }
 
-        // stage('Build') {
-        //     agent {
-        //         docker {
-        //             image 'node:18'
-        //             args '--network host'
-        //         }
-        //     }
-        //     steps {
-        //         script {
-        //             dir('./app') {
-        //                 sh 'npm run build' 
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:18'
+                    args '--network host'
+                }
+            }
+            steps {
+                script {
+                    dir('./app') {
+                        sh 'npm run build' 
+                    }
+                }
+            }
+        }
 
-        // stage('Analyze code with SonarQube') {
+        stage('Analyze code with SonarQube') {
+            agent any
+            steps {
+                script {
+                    def scannerHome = tool 'sonar-scanner' 
+
+                    withSonarQubeEnv('sonarqube-server') {
+                        withCredentials([string(credentialsId: 'sonarqube-my-portfolio-token', variable: 'SONAR_TOKEN')]) {
+                            dir('./app') {
+                                sh """
+                                    ${scannerHome}/bin/sonar-scanner \
+                                    -Dsonar.projectKey=my-portfolio \
+                                    -Dsonar.sources=. \
+                                    -Dsonar.login=${SONAR_TOKEN}  
+                                """
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // stage('Check Quality Gate') {
         //     agent any
         //     steps {
         //         script {
-        //             def scannerHome = tool 'sonar-scanner' 
-
-        //             withSonarQubeEnv('sonarqube-server') {
-        //                 withCredentials([string(credentialsId: 'sonarqube-my-portfolio-token', variable: 'SONAR_TOKEN')]) {
-        //                     dir('./app') {
-        //                         sh """
-        //                             ${scannerHome}/bin/sonar-scanner \
-        //                             -Dsonar.projectKey=my-portfolio \
-        //                             -Dsonar.sources=. \
-        //                             -Dsonar.login=${SONAR_TOKEN}  
-        //                         """
-        //                     }
-        //                 }
-        //             }
+        //             waitForQualityGate abortPipeline: true 
         //         }
         //     }
         // }
 
-        // // stage('Check Quality Gate') {
-        // //     agent any
-        // //     steps {
-        // //         script {
-        // //             waitForQualityGate abortPipeline: true 
-        // //         }
-        // //     }
-        // // }
-
-        // stage('Building and pushing container image') {
-        //     agent any
-        //     when {
-        //         allOf {
-        //             expression {
-        //                 currentBuild.result == null || currentBuild.result == 'SUCCESS'  
-        //             }
-        //         }
-        //     }
-        //     steps {
-        //         script {
-        //             withCredentials([usernamePassword(credentialsId: 'docker-hub-access-token', 
-        //                                    usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', 
-        //                                    passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
+        stage('Building and pushing container image') {
+            agent any
+            when {
+                allOf {
+                    expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS'  
+                    }
+                }
+            }
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-access-token', 
+                                           usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', 
+                                           passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
                         
-        //                 sh """
-        //                     docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}
-        //                     docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
-        //                     docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
-        //                 """
-        //             }
-        //         }
-        //     }
-        // }
+                        sh """
+                            docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}
+                            docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+                            docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
+                        """
+                    }
+                }
+            }
+        }
 
         stage("Deploying app on a 'production server'") {
             agent any
