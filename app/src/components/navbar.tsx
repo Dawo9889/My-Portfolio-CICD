@@ -29,7 +29,7 @@ export function Navbar() {
           onPointerEnterCapture={undefined} 
           onPointerLeaveCapture={undefined}        
         >
-          Dawid Gala - Student 3. roku IT, DevOps
+          Dawid Gala - Student 3. roku IT, DevOpsss
         </Typography>
 
 
