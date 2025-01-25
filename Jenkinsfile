@@ -120,6 +120,9 @@ pipeline {
                         sshagent(['deploy_ssh_user']) {
                             sh '''
                                 ssh -o StrictHostKeyChecking=no deploy@192.168.1.134
+                                pwd
+                                ls -la
+                                hostname
 
                                 # Logowanie do Docker Hub
                                 echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
