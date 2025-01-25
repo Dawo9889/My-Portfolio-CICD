@@ -110,16 +110,6 @@ pipeline {
             }
         }
 
-        stage('Post-build') {
-            agent any
-            steps {
-                script {
-                    echo 'Build completed!' 
-                }
-            }
-        }
-
-
         stage("Deploying app on a 'production server'") {
             agent any
             steps {
@@ -151,6 +141,27 @@ pipeline {
                 }
             }
         }
+
+
+
+
+
+
+
+
+
+
+        stage('Post-build') {
+            agent any
+            steps {
+                script {
+                    echo 'Build completed!' 
+                }
+            }
+        }
+
+
+        
 
 
     }
