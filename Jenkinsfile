@@ -118,8 +118,8 @@ pipeline {
                                                     usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', 
                                                     passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
                         sshagent(['deploy_ssh_user']) {
-                            sh """
-                                ssh -o StrictHostKeyChecking=no deploy@192.168.1.134 << EOF
+                            sh '''
+                                ssh -o StrictHostKeyChecking=no deploy@192.168.1.134
 
                                 # Logowanie do Docker Hub
                                 echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
@@ -134,8 +134,8 @@ pipeline {
                                 # Uruchomienie nowego kontenera
                                 docker run -d --name my-portfolio-app -p 4500:3000 ${DOCKER_IMAGE}:${DOCKER_TAG}
 
-                                EOF
-                            """
+                        
+                            '''
                         }
                     }
                 }
