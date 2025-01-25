@@ -128,8 +128,8 @@ pipeline {
                                 docker pull ${DOCKER_IMAGE}:${DOCKER_TAG}
 
                                 # Zatrzymanie i usunięcie starego kontenera (jeśli istnieje)
-                                docker stop app || true
-                                docker rm app || true
+                                docker stop my-portfolio-app || true
+                                docker rm my-portfolio-app || true
 
                                 # Uruchomienie nowego kontenera
                                 docker run -d --name my-portfolio-app -p 4500:3000 ${DOCKER_IMAGE}:${DOCKER_TAG}
