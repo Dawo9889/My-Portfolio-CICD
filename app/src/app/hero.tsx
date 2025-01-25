@@ -16,7 +16,7 @@ function Hero() {
             color="gray"
             className="mt-4 mb-12 w-full md:max-w-full lg:max-w-4xl" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}
           >
-            Witam serdecznie na mojej stronie! 
+            Witam serdecznie na mojej stronieeee! 
             Znajdziesz tutaj szczegółowy opis moich doświadczeń zawodowych, umiejętności 
             oraz informacji o tym, czym zajmuję się w wolnym czasie. 
             Skupię się szczególnie na mojej drodze zawodowej w obszarze DevOps, którą zdecydowałem się podjąć i rozwijać.
