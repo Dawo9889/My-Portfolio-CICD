@@ -39,7 +39,7 @@ const POJECTS= [
     title: "My Portfolio CI/CD Project Development",
     githubLink: "https://github.com/Dawo9889/My-Portfolio-CICD",
     date: "01.2025",
-    children:"Co tu się dużo rozpisywać. Projekt, który widzicie przed sobą :) "
+    children: "Nie ma co się za bardzo rozpisywać – oto projekt, który udało mi się stworzyć i który z dumą prezentuję!"
   },
   {
     icon: CommandLineIcon,
