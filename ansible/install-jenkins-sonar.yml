@@ -37,10 +37,14 @@
       args:
         chdir: /docker/jenkins
 
+    - name: Create .ssh directory inside the jenkins-blueocean container
+      command: docker exec jenkins-blueocean mkdir -p /var/jenkins_home/.ssh
+
+    - name: Set permissions for .ssh directory
+      command: docker exec jenkins-blueocean chmod 700 /var/jenkins_home/.ssh
+
     - name: Run ssh-keyscan inside the jenkins-blueocean container
-      command: docker exec jenkins-blueocean sh -c "ssh-keyscan github.com >> ~/.ssh/known_hosts"
-      args:
-        chdir: /docker/jenkins
+      command: docker exec jenkins-blueocean sh -c "ssh-keyscan github.com >> /var/jenkins_home/.ssh/known_hosts"
       
     - name: Create directory for sonarqube Docker setup
       file:

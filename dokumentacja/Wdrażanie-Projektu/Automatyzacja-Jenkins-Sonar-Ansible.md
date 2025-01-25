@@ -445,12 +445,15 @@ W procesie CI/CD kluczową rolę odgrywa również część CD – Continuous De
 Po zakończeniu etapów, w których pipeline weryfikuje poprawność naszego kodu, przechodzimy do kolejnego kroku, jakim jest budowanie obrazu kontenera oraz wypchnięcie go do repozytorium. Do tego celu wykorzystamy Docker Hub – popularne repozytorium dla obrazów kontenerowych.
 
 Przede wszystkim przygotujmy naszą infrastrukturę do tego zadania:
+
 1. Stwórzmy access token w docker hub:
    ![docker-token]
+
 2. Aby Jenkins mógł uzyskać dostęp do naszego repozytorium na Docker Hub, musimy dodać odpowiednie dane uwierzytelniające jako poufne zmienne. W tym przypadku, jako nazwę użytkownika podajemy nasze konto na Docker Hub, a jako hasło – token dostępu.
    ![jenkins-docker-cred]
 
 3. W naszym pipeline dodajemy etap, który będzie odpowiedzialny za budowanie obrazu kontenera oraz wypychanie go do naszego repozytorium na Docker Hub. Etap ten zostanie uruchomiony tylko wtedy, gdy wszystkie poprzednie etapy pipeline zakończą się powodzeniem, co zapewnia odpowiednią kontrolę nad jakością kodu przed utworzeniem obrazu.
+
    ```groovy
 
     environment {
@@ -484,6 +487,7 @@ Przede wszystkim przygotujmy naszą infrastrukturę do tego zadania:
             }
         }
    ```
+   
 **Warunek** `when`: Etap ten uruchomi się tylko wtedy, gdy wszystkie poprzednie etapy pipeline zakończą się sukcesem (sprawdzamy, czy currentBuild.result == null || currentBuild.result == 'SUCCESS').
 
 **Zalogowanie do Docker Hub**
@@ -493,6 +497,68 @@ Przede wszystkim przygotujmy naszą infrastrukturę do tego zadania:
 
 Gdy wszystko mamy skonfigurowane tak jak należy to na naszym repozytorium powinien pojawić się obraz:
 ![docker-hub-image]
+
+
+## Wdrażanie kontenera na serwer produkcyjny
+
+Teraz, gdy mamy wszystko gotowe, możemy podejśc do tworzenia automatyzacji pod wdrożenie na serwerze produkcyjnym. Do tego wykorzystałem ten kod w `Jenkinsfile`:
+
+```Groovy
+stage("Deploying app on a 'production server'") {
+            agent any
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-access-token', 
+                                                    usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', 
+                                                    passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
+                        sshagent(['deploy_ssh_user']) {
+                            sh '''
+                                ssh -o StrictHostKeyChecking=no deploy@192.168.1.134 << EOF
+                                pwd
+                                ls -la
+                                hostname
+
+                                # Logowanie do Docker Hub
+                                echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
+
+                                # Zatrzymanie i usunięcie starego kontenera (jeśli istnieje)
+                                docker stop my-portfolio-app
+                                docker rm my-portfolio-app
+
+                                # Pobranie najnowszego obrazu Dockera
+                                docker pull ${DOCKER_IMAGE}:${DOCKER_TAG}
+
+                                # Uruchomienie nowego kontenera
+                                docker run -d --name my-portfolio-app -p 4500:3000 ${DOCKER_IMAGE}:${DOCKER_TAG}
+
+                                
+                            '''
+                        }
+                    }
+                }
+            }
+        }
+```
+
+Ten kod loguje sie za pomocą uprzednio utworzonego klucza do uprzednio utworzonego użytkownika deploy, który ma ograniczone uprawnienia na serwerze, dzięki temu zachowamy pewną szczelnośc jeżeli chodzi o bezpieczeństwo.
+
+Następnie pobiera nowy obraz kontenera i go podmienia.
+
+## Dostęp publiczny z całego świata
+
+Pozwolę sobie zauważyć, że aplikacja ta jest wdrażana u mnie, lokalnie. Aby umożliwić dostęp do tej strony, musiałem też kupić domene i podłączyć ją do Cloudflare, dzięki któremu wykorzystałem tunelowanie Cloudflare. Jest to bezpieczna metoda na wystawienie swoich usług do sieci.
+
+# Finalna wersja.
+
+Teraz, gdy wszystko działa tak jak należy, możemy zmienić co nieco w moim kodzie i sprawdzić efekty.
+
+Aktualnie strona wygląda tak:
+
+![strona1]
+
+Teraz dodam taki blok kodu do mojej strony:
+
+![added-code]
 
 [ansible]: ./media/ansible.png
 [github-key]: ./media/github-key.png
@@ -510,3 +576,5 @@ Gdy wszystko mamy skonfigurowane tak jak należy to na naszym repozytorium powin
 [docker-token]: ./media/docker-token.png
 [jenkins-docker-cred]: ./media/jenkins-docker-cred.png
 [docker-hub-image]: ./media/docker-hub-image.png
+[strona1]: ./media/strona1.png
+[added-code]: ./media/added-code.png
