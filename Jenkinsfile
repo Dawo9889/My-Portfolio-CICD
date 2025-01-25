@@ -119,7 +119,7 @@ pipeline {
                                                     passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
                         sshagent(['deploy_ssh_user']) {
                             sh '''
-                                ssh -o StrictHostKeyChecking=no deploy@192.168.1.134 << 'EOF'
+                                ssh -o StrictHostKeyChecking=no deploy@192.168.1.134 << EOF
                                 pwd
                                 ls -la
                                 hostname
