@@ -556,6 +556,9 @@ Aktualnie strona wygląda tak:
 
 ![strona1]
 
+Teraz dodam taki blok kodu do mojej strony:
+
+![added-code]
 
 [ansible]: ./media/ansible.png
 [github-key]: ./media/github-key.png
@@ -574,3 +577,4 @@ Aktualnie strona wygląda tak:
 [jenkins-docker-cred]: ./media/jenkins-docker-cred.png
 [docker-hub-image]: ./media/docker-hub-image.png
 [strona1]: ./media/strona1.png
+[added-code]: ./media/added-code.png
