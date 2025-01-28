@@ -1,6 +1,7 @@
-# Dokumentacja z tworzenia projektu dotyczącego automatyzacji wdrażania aplikacji webowej na serwer produkcyjny z wykorzystaniem narzędzi: Jenkins, Sonarqube, Ansible i inne.
+# Dokumentacja z tworzenia projektu dotyczącego automatyzacji wdrażania aplikacji webowej na serwer produkcyjny z wykorzystaniem narzędzi: Jenkins, Sonarqube, Ansible i inne
 
 # Przygotowanie
+
 Ze względu na częste przemieszczanie się i pracę na różnych urządzeniach, postanowiłem stworzyć prostą strukturę Ansible, która umożliwi mi automatyzację instalacji Dockera, Jenkins oraz SonarQube na maszynie wirtualnej. Dzięki temu proces instalacji będzie uniwersalny i niezależny od konfiguracji poszczególnych urządzeń.
 
 ## Ansible
@@ -9,7 +10,7 @@ Ansible to narzędzie do automatyzacji konfiguracji, zarządzania i wdrażania a
 
 Wszystkie pliki dotyczące Ansible znajdują się w katalogu /ansible. Na początek warto zwrócić uwagę na plik hosts.yml, w którym definiujemy hosty oraz ich grupy, a także ustawienia specyficzne dla poszczególnych maszyn. Tutaj mam już opisanego użytkownika utworzonego w późniejszym playbooku, dzięku któremu będę tworzyć wszystkie zmiany.
 
-Oczywiście pozwalam sobie na pozostawienia tu hasła, ponieważ jest to tylko maszyna wirtualna bez publicznego dostępu :) 
+Oczywiście pozwalam sobie na pozostawienia tu hasła, ponieważ jest to tylko maszyna wirtualna bez publicznego dostępu :)
 
 **Plik `host.yml`**
 
@@ -25,7 +26,7 @@ all:
 
 ```
 
-Pierwszym plikiem playbooka, który użyjemy, jest `create_user.yml`. W tym pliku tworzymy użytkownika z pełnymi uprawnieniami do zarządzania serwerem, co znacznie ułatwi pracę i jednocześnie pozwoli na oddzielenie odpowiedzialności. Dodatkowo dodajemy klucz publiczny do ssh, 
+Pierwszym plikiem playbooka, który użyjemy, jest `create_user.yml`. W tym pliku tworzymy użytkownika z pełnymi uprawnieniami do zarządzania serwerem, co znacznie ułatwi pracę i jednocześnie pozwoli na oddzielenie odpowiedzialności. Dodatkowo dodajemy klucz publiczny do ssh.
 
 **Plik `create_user.yml`**
 
@@ -194,7 +195,7 @@ Tutaj wykorzystujemy równiez pliki z folderu `/files`
 
 Kod `Run ssh-keyscan inside the jenkins-blueocean container` pozwoli nam na dodanie zaufanego połaczenia ssh dla github, który przyda nam się później.
 
-Dzięki tym plikom jestem w stanie w bardzo łatwy sposób skonfigurować dowolną maszynę wirtualną. Wystarczy, że skonfiguruje ansible pod dana maszynę i wszystko robi się za mnie. 
+Dzięki tym plikom jestem w stanie w bardzo łatwy sposób skonfigurować dowolną maszynę wirtualną. Wystarczy, że skonfiguruje ansible pod dana maszynę i wszystko robi się za mnie.
 
 ![ansible]
 
@@ -202,18 +203,20 @@ Dzięki tym plikom jestem w stanie w bardzo łatwy sposób skonfigurować dowoln
 
 Na razie moje repozytorium jest ustawione jako prywatne, dlatego potrzebujemy skonfigurować Jenkins, aby mógł uzyskać dostęp do prywantego repozytorium.
 
-### Aby skonfigurować Jenkinsa do pracy z prywatnym repozytorium na GitHubie, wykonaj poniższe kroki, które pozwolą Jenkinsowi uzyskać dostęp do repozytorium oraz wykrywać zmiany.
-
+### Aby skonfigurować Jenkinsa do pracy z prywatnym repozytorium na GitHubie, wykonaj poniższe kroki, które pozwolą Jenkinsowi uzyskać dostęp do repozytorium oraz wykrywać zmiany
 
 #### Generowanie pary klucza
 
-1. Na dowolnym komputerze (na którym masz dostęp do terminala) wygeneruj parę kluczy SSH:
-   ```bash
+1. Na dowolnym komputerze (na którym masz dostęp do terminala) wygeneruj parę kluczy SSH.
+
+```bash
    ssh-keygen -t rsa -b 4096 -C "jenkins" -f /tmp/jenkins_rsa
-    ```
+```
+
 Parametr `-f` określa lokalizację i nazwę pliku, w którym klucz będzie zapisany. Zawartość klucza prywatnego zostanie zapisana w `/tmp/jenkins_rsa`, a klucza publicznego w `/tmp/jenkins_rsa.pub`.
 
 #### Dodanie klucza publicznego ssh do github - deploy keys
+
 1. Przejdź do swojego repozytorium na GitHubie.
 2. Wejdź w Settings repozytorium, a następnie w zakładkę Deploy keys.
 3. Kliknij Add deploy key.
@@ -221,10 +224,10 @@ Parametr `-f` określa lokalizację i nazwę pliku, w którym klucz będzie zapi
 5. Wklej zawartość klucza publicznego SSH, który wcześniej skopiowałeś, w pole Key.
 6. Upewnij się, że zaznaczone jest Allow write access, jeśli chcesz, by Jenkins mógł wypychać zmiany do repozytorium.
 7. Kliknij Add key.
-   
+
 ![github-key]
 
-####  Dodanie klucza prywatnego SSH do Jenkins (Credentials)
+#### Dodanie klucza prywatnego SSH do Jenkins (Credentials)
 
 1. Zaloguj się do swojego Jenkinsa.
 2. Przejdź do Manage Jenkins > Manage Credentials > (global) lub inna domena, jeśli masz taką stworzoną.
@@ -259,6 +262,7 @@ Jeżeli wszystko skonfigurowaliśmy poprawnie to nasz build powinien przejść p
 Teraz stwórzmy pipeline, który uruchomi się na agencie docker z gotowym środowiskiem:
 
 **`Jenkinsfile`**
+
 ```groovy
 pipeline {
     agent {
@@ -316,7 +320,7 @@ Jest to bardzo prosty pipeline, który tylko buduje nasz kod. Dzięki niemu moż
 
 ## Integracja Jenkins z Sonarqbue
 
-Po więcej informacji zapraszam: [Instalacja Jenkins i SonarQube](../Instalacja-Jenkins-SonarQube/Jenkins-i-SonarQube.md) - Tu zająłem się szczegółowym opisem kroków, które tutaj podejmę. 
+Po więcej informacji zapraszam: [Instalacja Jenkins i SonarQube](../Instalacja-Jenkins-SonarQube/Jenkins-i-SonarQube.md) - Tu zająłem się szczegółowym opisem kroków, które tutaj podejmę.
 
 Po konfiguracji możemy utworzyć stage pod analize kody, jeżeli wszystko mamy dobrze, to powinna pojawić się nam analiza w sonarqube.
 Jednoczesnie zmieniłem plik Jenkinsfile, ponieważ w międzyczasie moja struktura projektu przeszła restrukturyzacje. Zauważyłem że kopiuje wszystko do kontenera, co też sonarqube zauwazył.
@@ -412,16 +416,15 @@ pipeline {
 
 ```
 
-Sonarqube wskaujze nam na przykład taki bład: 
+Sonarqube wskaujze nam na przykład taki bład:
 
 ![sonar-issues]
 
-Co sugeruje nam, że kontener jest uruchamiany z użyykownikiem root, żeby to naprawić musimy okreslić uzytkownika, który będzie uruchamiany w kontenerze. Aby to zrobić wystarczu do pliku `Dockerfile` dodać na przykład `User nodejs`. 
+Co sugeruje nam, że kontener jest uruchamiany z użyykownikiem root, żeby to naprawić musimy okreslić uzytkownika, który będzie uruchamiany w kontenerze. Aby to zrobić wystarczu do pliku `Dockerfile` dodać na przykład `User nodejs`.
 
 Teraz gdy ponownie uruchomimy pipeline i wykona sie skan, wszystko jest już jako pozytywne:
 
 ![sonar-fixed]
-
 
 Na razie nasza analiza kodu nie wpływa na wynik wykonania się Pipeline'u. Aby to zmienić wystraczy dodać kod do Jenkinsfile, który będzie czekał na wynik analizy.
 
@@ -445,12 +448,15 @@ W procesie CI/CD kluczową rolę odgrywa również część CD – Continuous De
 Po zakończeniu etapów, w których pipeline weryfikuje poprawność naszego kodu, przechodzimy do kolejnego kroku, jakim jest budowanie obrazu kontenera oraz wypchnięcie go do repozytorium. Do tego celu wykorzystamy Docker Hub – popularne repozytorium dla obrazów kontenerowych.
 
 Przede wszystkim przygotujmy naszą infrastrukturę do tego zadania:
+
 1. Stwórzmy access token w docker hub:
    ![docker-token]
+
 2. Aby Jenkins mógł uzyskać dostęp do naszego repozytorium na Docker Hub, musimy dodać odpowiednie dane uwierzytelniające jako poufne zmienne. W tym przypadku, jako nazwę użytkownika podajemy nasze konto na Docker Hub, a jako hasło – token dostępu.
    ![jenkins-docker-cred]
 
 3. W naszym pipeline dodajemy etap, który będzie odpowiedzialny za budowanie obrazu kontenera oraz wypychanie go do naszego repozytorium na Docker Hub. Etap ten zostanie uruchomiony tylko wtedy, gdy wszystkie poprzednie etapy pipeline zakończą się powodzeniem, co zapewnia odpowiednią kontrolę nad jakością kodu przed utworzeniem obrazu.
+
    ```groovy
 
     environment {
@@ -484,6 +490,7 @@ Przede wszystkim przygotujmy naszą infrastrukturę do tego zadania:
             }
         }
    ```
+
 **Warunek** `when`: Etap ten uruchomi się tylko wtedy, gdy wszystkie poprzednie etapy pipeline zakończą się sukcesem (sprawdzamy, czy currentBuild.result == null || currentBuild.result == 'SUCCESS').
 
 **Zalogowanie do Docker Hub**
@@ -493,6 +500,67 @@ Przede wszystkim przygotujmy naszą infrastrukturę do tego zadania:
 
 Gdy wszystko mamy skonfigurowane tak jak należy to na naszym repozytorium powinien pojawić się obraz:
 ![docker-hub-image]
+
+## Wdrażanie kontenera na serwer produkcyjny
+
+Teraz, gdy mamy wszystko gotowe, możemy podejśc do tworzenia automatyzacji pod wdrożenie na serwerze produkcyjnym. Do tego wykorzystałem ten kod w `Jenkinsfile`:
+
+```Groovy
+stage("Deploying app on a 'production server'") {
+            agent any
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-access-token', 
+                                                    usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', 
+                                                    passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
+                        sshagent(['deploy_ssh_user']) {
+                            sh '''
+                                ssh -o StrictHostKeyChecking=no deploy@192.168.1.134 << EOF
+                                pwd
+                                ls -la
+                                hostname
+
+                                # Logowanie do Docker Hub
+                                echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
+
+                                # Zatrzymanie i usunięcie starego kontenera (jeśli istnieje)
+                                docker stop my-portfolio-app
+                                docker rm my-portfolio-app
+
+                                # Pobranie najnowszego obrazu Dockera
+                                docker pull ${DOCKER_IMAGE}:${DOCKER_TAG}
+
+                                # Uruchomienie nowego kontenera
+                                docker run -d --name my-portfolio-app -p 4500:3000 ${DOCKER_IMAGE}:${DOCKER_TAG}
+
+                                
+                            '''
+                        }
+                    }
+                }
+            }
+        }
+```
+
+Ten kod loguje sie za pomocą uprzednio utworzonego klucza do uprzednio utworzonego użytkownika deploy, który ma ograniczone uprawnienia na serwerze, dzięki temu zachowamy pewną szczelnośc jeżeli chodzi o bezpieczeństwo.
+
+Następnie pobiera nowy obraz kontenera i go podmienia.
+
+## Dostęp publiczny z całego świata
+
+Pozwolę sobie zauważyć, że aplikacja ta jest wdrażana u mnie, lokalnie. Aby umożliwić dostęp do tej strony, musiałem też kupić domene i podłączyć ją do Cloudflare, dzięki któremu wykorzystałem tunelowanie Cloudflare. Jest to bezpieczna metoda na wystawienie swoich usług do sieci.
+
+# Finalna wersja
+
+Teraz, gdy wszystko działa tak jak należy, możemy zmienić co nieco w moim kodzie i sprawdzić efekty.
+
+Aktualnie strona wygląda tak:
+
+![strona1]
+
+Teraz dodam taki blok kodu do mojej strony:
+
+![added-code]
 
 [ansible]: ./media/ansible.png
 [github-key]: ./media/github-key.png
@@ -510,3 +578,5 @@ Gdy wszystko mamy skonfigurowane tak jak należy to na naszym repozytorium powin
 [docker-token]: ./media/docker-token.png
 [jenkins-docker-cred]: ./media/jenkins-docker-cred.png
 [docker-hub-image]: ./media/docker-hub-image.png
+[strona1]: ./media/strona1.png
+[added-code]: ./media/added-code.png

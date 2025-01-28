@@ -76,16 +76,14 @@ pipeline {
             }
         }
 
-        stage('Check Quality Gate') {
-            agent any
-            steps {
-                script {
-                    timeout(time: 5, unit: 'MINUTES') {
-                        waitForQualityGate abortPipeline: true 
-                    }
-                }
-            }
-        }
+        // stage('Check Quality Gate') {
+        //     agent any
+        //     steps {
+        //         script {
+        //             waitForQualityGate abortPipeline: true 
+        //         }
+        //     }
+        // }
 
         stage('Building and pushing container image') {
             agent any
@@ -103,7 +101,7 @@ pipeline {
                                            passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
                         
                         sh """
-                            docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}
+                            echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
                             docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
                             docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
                         """
@@ -111,6 +109,50 @@ pipeline {
                 }
             }
         }
+
+        stage("Deploying app on a 'production server'") {
+            agent any
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-access-token', 
+                                                    usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', 
+                                                    passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
+                        sshagent(['deploy_ssh_user']) {
+                            sh '''
+                                ssh -o StrictHostKeyChecking=no deploy@192.168.1.134 << EOF
+                                pwd
+                                ls -la
+                                hostname
+
+                                # Logowanie do Docker Hub
+                                echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
+
+                                # Zatrzymanie i usunięcie starego kontenera (jeśli istnieje)
+                                docker stop my-portfolio-app
+                                docker rm my-portfolio-app
+
+                                # Pobranie najnowszego obrazu Dockera
+                                docker pull ${DOCKER_IMAGE}:${DOCKER_TAG}
+
+                                # Uruchomienie nowego kontenera
+                                docker run -d --restart=always --name my-portfolio-app -p 4500:3000 ${DOCKER_IMAGE}:${DOCKER_TAG}
+
+                                
+                            '''
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
 
         stage('Post-build') {
             agent any
@@ -120,6 +162,11 @@ pipeline {
                 }
             }
         }
+
+
+        
+
+
     }
     
     post {

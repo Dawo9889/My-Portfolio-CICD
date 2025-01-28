@@ -31,6 +31,16 @@ function Hero() {
 
           />
 
+          {/* Sekcja z projektem DevOps */}
+          <Typography variant="h3" color="blue-gray" className="mt-4 mb-6 w-full md:max-w-full lg:max-w-4xl" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            Projekt DevOps
+          </Typography>
+          <Typography variant="lead" color="gray" className="mb-6" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            Ta strona jest częścią mojego projektu DevOps, w ramach którego wykorzystuję różne technologie do automatyzacji i wdrożenia aplikacji w środowisku produkcyjnym.
+            Możesz zapoznać się z kodem źródłowym tego projektu na{" "}
+            <a href="https://github.com/Dawo9889/My-Portfolio-CICD" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800"> GitHubie.</a>
+          </Typography>
+
           <Typography className="mt-12 mb-4 text-blue-gray-900 font-medium uppercase" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
             Znajdziesz mnie na:
           </Typography>
