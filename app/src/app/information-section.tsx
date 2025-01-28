@@ -15,7 +15,7 @@ const POJECTS= [
   {
     icon: CommandLineIcon,
     title: "Cupid App – aplikacja stworzona do robienia i zarządzania zdjęciami weselnymi.",
-    githubLink: "https://github.com/Dawo9889/IO_PROJECT_2024",
+    githubLink: "https://github.com/Dawo9889/cupid-app",
     date: "10.2024 - 02.2025",
     children: (
       <>
