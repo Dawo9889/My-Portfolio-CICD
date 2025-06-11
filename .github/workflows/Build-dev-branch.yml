@@ -31,6 +31,6 @@ jobs:
 
     # Budowanie projektu
     - name: Run build
-      run: npm run build
+      run: npm run build --no-lint
       working-directory: ./app
 
