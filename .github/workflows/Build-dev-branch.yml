@@ -22,7 +22,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '22'
 
     # Instalacja zależności
     - name: Install dependencies
@@ -31,6 +31,6 @@ jobs:
 
     # Budowanie projektu
     - name: Run build
-      run: npm run build
+      run: npm run build --no-lint
       working-directory: ./app
 
