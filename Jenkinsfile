@@ -135,7 +135,7 @@ pipeline {
                                 docker pull ${DOCKER_IMAGE}:${DOCKER_TAG}
 
                                 # Uruchomienie nowego kontenera
-                                docker run -d --name my-portfolio-app -p 4500:3000 ${DOCKER_IMAGE}:${DOCKER_TAG}
+                                docker run -d --restart=always --name my-portfolio-app -p 4500:3000 ${DOCKER_IMAGE}:${DOCKER_TAG}
 
                                 
                             '''
