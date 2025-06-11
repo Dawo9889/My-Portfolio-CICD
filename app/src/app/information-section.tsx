@@ -96,7 +96,7 @@ const EXPERIENCE = [
   {
     icon: BriefcaseIcon,
     title: "Pracownik DevOps",
-    date: "10.2024 - Teraz",
+    date: "10.2024 - Maj 2025",
     children:
       "Moim głównym zadaniem jest współpraca z zespołem wdrożeniowców w celu realizacji określonych zadań związanych z rozwojem i utrzymaniem infrastruktury IT. \
        Kluczowym elementem mojej pracy jest zarządzanie kontenerami oraz ich orkiestracja. \
@@ -108,11 +108,18 @@ const EXPERIENCE = [
 const CERTIFICATES = [
   {
     icon: AcademicCapIcon,
-    title: "Program Corporate Readiness Certificate, ING Hubs",
+    title: "Program Corporate Readiness Certificate, ING Hubs - Cybersecurity",
     date: "Technical Skills",
     githubLink: "https://www.linkedin.com/in/galadawid/overlay/1717882932032/single-media-viewer/?type=DOCUMENT&profileId=ACoAAEX78IcBnWMfZ3oQfHKNwbBbkLLHPEDBZj8",
     children:
       "Ukazuje podejście do zabezpieczeń w firmie i w rozwiązaniach komercyjnych. Kurs miał prawie 40h, gdzie każego dnia uczyłem się czegoś nowego. Przede wszystkim dowiedziałem się jak zabezpieczyć firmę przed potencjalnymi atakami cyber.",
+  },
+    {
+    icon: AcademicCapIcon,
+    title: "Program Corporate Readiness Certificate, ING Hubs - Administrator IT",
+    date: "Technical Skills",
+    githubLink: "https://credsverse.com/credentials/78bd82ff-2a51-426b-8a2e-9cd202a82cfd",
+    children: "Na szkoleniu nauczyłem się pracy z administrowaniem systemami IT w korporacji"   
   }
 ];
 
@@ -167,15 +174,52 @@ const SKILLS = [
       "Prometheus, Grafana i Grafana Loki to narzędzia, które wykorzystuję do monitorowania oraz analizy systemów. Prometheus służy do zbierania i przechowywania metryk aplikacji, Grafana umożliwia wizualizację danych w postaci interaktywnych dashboardów, a Grafana Loki pozwala na efektywne gromadzenie i przeszukiwanie logów, co ułatwia diagnozowanie problemów i optymalizację działania aplikacji.",
   },
   {
+  icon: FireIcon,
+  title: "Terraform",
+  date: "Technical Skills",
+  children:
+    "Terraforma używałem do automatycznego tworzenia infrastruktury w chmurze. Pisałem moduły do provisionowania instancji EC2 w AWS oraz konfiguracji sieci VPC. Dzięki temu lepiej zrozumiałem podejście Infrastructure as Code i mogłem szybciej powtarzalnie budować środowiska testowe i produkcyjne.",
+  },
+  {
+    icon: FireIcon,
+    title: "Apache HTTP Server",
+    date: "Technical Skills",
+    children:
+      "Apache'a używałem do konfiguracji serwerów WWW, głównie w środowiskach testowych. Konfigurowałem wirtualne hosty, przekierowania oraz obsługę HTTPS przy użyciu certyfikatów SSL. Pomogło mi to zrozumieć podstawy działania backendowego serwera HTTP oraz jego integrację z aplikacjami webowymi.",
+  },
+  {
+    icon: FireIcon,
+    title: "Nginx",
+    date: "Technical Skills",
+    children:
+      "Nginx wykorzystywałem zarówno jako serwer statycznych plików, jak i jako reverse proxy. Konfigurowałem load balancing i przekierowania do aplikacji uruchomionych na różnych portach. Dzięki pracy z Nginx zrozumiałem lepiej jak działa routing żądań i optymalizacja wydajności w aplikacjach webowych.",
+  },
+  {
+    icon: FireIcon,
+    title: "SSL & PKI",
+    date: "Technical Skills",
+    children:
+      "Pracując z certyfikatami SSL oraz infrastrukturą klucza publicznego (PKI), nauczyłem się generować i zarządzać certyfikatami X.509, tworzyć żądania CSR oraz korzystać z własnych i zaufanych urzędów certyfikacji (CA). Konfigurowałem HTTPS na serwerach Nginx i Apache, dbając o bezpieczeństwo komunikacji i zgodność z aktualnymi standardami (np. TLS 1.2+). Dzięki tej wiedzy lepiej rozumiem, jak działa uwierzytelnianie i szyfrowanie w sieci.",
+  },
+
+  {
     icon: FireIcon,
     title: "Azure Cloud",
     date: "Technical Skills",
     children:
-      "Azure używałem do tworzenia maszyn wirtualnych z pulicznym ip. Pomagało mi to na wdrażanie aplikacji, które miały być wszędzie dostępne. Mocno przydatne okazało się także AKS z gotowym load balancerem",
+      "Azure używałem do tworzenia maszyn wirtualnych z publicznym ip. Pomagało mi to na wdrażanie aplikacji, które miały być wszędzie dostępne. Mocno przydatne okazało się także AKS z gotowym load balancerem",
   },
   {
+    icon: FireIcon,
+    title: "AWS Cloud",
+    date: "Technical Skills",
+    children:
+      "W ramach nauki chmury AWS pracowałem z różnymi usługami, w tym EC2 do uruchamiania maszyn wirtualnych i S3 do przechowywania plików. Szczególną uwagę poświęciłem Amazon EKS, ucząc się wdrażania aplikacji kontenerowych i zarządzania klastrem Kubernetes. Było to cenne doświadczenie w kontekście automatyzacji i skalowania usług.",
+  },
+
+  {
     icon: AcademicCapIcon,
-    title: "Angielski, poziom C1",
+    title: "Angielski, poziom B2/C1",
     date: "Soft Skills",
     children: "Przede wszystkim mój angielski pomaga mi w pracy. Czytanie dokumentacji, która często jest po angielsku nie sprawia mi problemu. Troche inaczej jest z rozmową, ale dalej jest to poziom wyższy niż komunikatywny",
   }
