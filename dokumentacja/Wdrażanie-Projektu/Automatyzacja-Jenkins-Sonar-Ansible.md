@@ -560,6 +560,15 @@ Teraz dodam taki blok kodu do mojej strony:
 
 ![added-code]
 
+
+Po 5min Jenkins sam zauważa zmiany i uruchamia pipeline:
+
+![pipeline-status]
+
+Strona natomiast wygląda teraz tak: 
+
+![strona-finale]
+
 [ansible]: ./media/ansible.png
 [github-key]: ./media/github-key.png
 [jenkins-github-credential]: ./media/jenkins-private-key-github.png
@@ -578,3 +587,5 @@ Teraz dodam taki blok kodu do mojej strony:
 [docker-hub-image]: ./media/docker-hub-image.png
 [strona1]: ./media/strona1.png
 [added-code]: ./media/added-code.png
+[pipeline-status]: ./media/pipeline-status.png
+[strona-finale]: ./media/strona-finale.png
