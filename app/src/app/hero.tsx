@@ -22,7 +22,7 @@ function Hero() {
             Skupię się szczególnie na mojej drodze zawodowej w obszarze DevOps, którą zdecydowałem się podjąć i rozwijać.
           </Typography>
 
-          {/* Dodanie zdjęcia pod opisem */}
+          {/* Add profile image under the description */}
           <img
             src="image/my-image.jpg" 
             alt="Dawid Gala"
@@ -31,7 +31,7 @@ function Hero() {
 
           />
 
-          {/* Sekcja z projektem DevOps */}
+          {/* DevOps project section */}
           <Typography variant="h3" color="blue-gray" className="mt-4 mb-6 w-full md:max-w-full lg:max-w-4xl">
             Projekt DevOps
           </Typography>

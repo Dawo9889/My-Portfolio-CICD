@@ -14,9 +14,9 @@ export function HobbyGory() {
         <Card color="transparent" shadow={false} className="py-8 lg:flex-row">
           <CardBody className="w-full lg:flex justify-between gap-10 h-full">
 
-            {/* Sekcja zdjęcia po lewej */}
+            {/* Image section on the left */}
             <div className="w-full lg:w-[50%] shrink-0">
-              <div className="relative w-full" style={{ paddingTop: '75%' }}> {/* Ustawienie 4:3 przez padding-top */}
+              <div className="relative w-full" style={{ paddingTop: '75%' }}> {/* Enforce 4:3 aspect ratio using padding-top */}
                 <Image
                   width={1024}
                   height={768} // 4:3 proporcje, czyli 1024 x 768
@@ -27,7 +27,7 @@ export function HobbyGory() {
               </div>
             </div>
 
-            {/* Sekcja tekstowa po prawej */}
+            {/* Text section on the right */}
             <div className="w-full mb-10 ml-10 lg:mb-0 lg:w-8/12">
               <Typography
                 variant="h3"

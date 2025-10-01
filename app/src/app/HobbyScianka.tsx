@@ -38,7 +38,7 @@ export function HobbyScianka() {
       <div className="container max-w-screen-lg mx-auto">
         <CardAny color="transparent" shadow={false} className="py-8 lg:flex-row">
           <CardBodyAny className="w-full lg:gap-10 h-full lg:!flex justify-between">
-            {/* Sekcja tekstowa */}
+            {/* Text section */}
             <div className="w-full mb-10 lg:mb-0">
               <TypographyAny variant="h3" color="blue-gray" className="mb-4 font-bold lg:max-w-xs">
                 3. Wspinaczka ściankowa
@@ -124,7 +124,7 @@ export function HobbyScianka() {
               </div>
             </div>
 
-            {/* Sekcja zdjęcia */}
+            {/* Image section */}
             <div className="h-full sm:w-[18rem] w-full shrink-0">
               <div className="aspect-w-3 aspect-h-4 w-full">
                 <Image

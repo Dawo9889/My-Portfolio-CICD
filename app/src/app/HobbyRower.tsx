@@ -68,7 +68,7 @@ export function HobbyRower() {
             <div className="h-full sm:w-[18rem] w-full shrink-0">
               <div className="aspect-w-3 aspect-h-4 w-full">
                 <Image
-                  width={576}  // 3:4 proporcje, szerokość 3, wysokość 4
+                  width={576}  // 3:4 ratio (width:height = 3:4)
                   height={768}
                   src={`/image/rower/rower${active}.jpg`}
                   alt="rower zdjęcie"

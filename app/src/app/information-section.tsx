@@ -25,12 +25,12 @@ const POJECTS= [
         <br></br>
         <br></br>
         Moim głównym zadaniem było: <br></br>
-        
+
           - Opracowanie aplikacji backendowej,<br></br>
           - Zabezpieczenie aplikacji,<br></br>
           - Skonteneryzowanie aplikacji za pomocą Dockera,<br></br>
           - Wystawienie aplikacji na serwer produkcyjny.<br></br>
-        
+
       </>
     ),
   },
@@ -88,19 +88,29 @@ const POJECTS= [
 const EXPERIENCE = [
   {
     icon: BriefcaseIcon,
-    title: "Stażysta DevOps",
+    title: "Stażysta DevOps | COIG S.A.",
     date: "07.2024 - 10.2024",
     children:
       "Moim głównym zadaniem było zapoznanie się z pracą w środowisku IT w dużej firmie. Skupiłem się na zrozumieniu przepływów pracy, współpracy z zespołami międzydziałowymi oraz poznawaniu podstawowych praktyk DevOps w praktycznym środowisku.",
   },
   {
     icon: BriefcaseIcon,
-    title: "Pracownik DevOps",
-    date: "10.2024 - Maj 2025",
+    title: "Pracownik DevOps | COIG S.A.",
+    date: "10.2024 - 05.2025",
     children:
-      "Moim głównym zadaniem jest współpraca z zespołem wdrożeniowców w celu realizacji określonych zadań związanych z rozwojem i utrzymaniem infrastruktury IT. \
-       Kluczowym elementem mojej pracy jest zarządzanie kontenerami oraz ich orkiestracja. \
-       Na co dzień korzystam z takich narzędzi jak Prometheus i Grafana do monitorowania oraz analizy wydajności systemów.",
+      "Moim głównym zadaniem była współpraca z zespołem wdrożeniowców przy realizacji zadań związanych z rozwojem i utrzymaniem infrastruktury IT. \
+       Kluczowym elementem mojej pracy było zarządzanie kontenerami oraz ich orkiestracja. \
+       Na co dzień korzystałem z narzędzi takich jak Prometheus i Grafana do monitorowania i analizy wydajności systemów.",
+  },
+  {
+    icon: BriefcaseIcon,
+    title: "Cloud DevOps Engineer | SAP Poland",
+    date: "07.2025 - NOW",
+    children:
+      "Pracuję przy projekcie open source Kyma jako członek zespołu DevOps. \
+      Moje obowiązki obejmują projektowanie, wdrażanie i utrzymanie pipeline’ów CI/CD oraz usług wspierających zespoły developerskie. \
+      Skupiam się na automatyzacji procesów, poprawie niezawodności oraz usprawnianiu wydajności dostarczania oprogramowania.",
+
   }
 ];
 

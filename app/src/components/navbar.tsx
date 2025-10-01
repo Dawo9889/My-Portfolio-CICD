@@ -25,11 +25,9 @@ export function Navbar() {
     >
       <div className="container mx-auto flex items-center justify-between">
         <TypographyAny color="blue-gray" className="text-lg font-bold">
-          Dawid Gala - Student 3. roku IT, DevOps
+          Dawid Gala - Student 4. roku IT, DevOps
         </TypographyAny>
 
-
-      
       </div>
 
   </NavbarAny>
