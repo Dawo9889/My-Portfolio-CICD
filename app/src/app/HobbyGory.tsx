@@ -11,8 +11,8 @@ export function HobbyGory() {
     <section className="py-4 px-8 lg:py-12">
       <div className="container max-w-screen-lg mx-auto">
 
-        <Card color="transparent" shadow={false} className="py-8 lg:flex-row" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-          <CardBody className="w-full lg:flex justify-between gap-10 h-full"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+        <Card color="transparent" shadow={false} className="py-8 lg:flex-row">
+          <CardBody className="w-full lg:flex justify-between gap-10 h-full">
 
             {/* Sekcja zdjęcia po lewej */}
             <div className="w-full lg:w-[50%] shrink-0">
@@ -32,13 +32,13 @@ export function HobbyGory() {
               <Typography
                 variant="h3"
                 color="blue-gray"
-                className="mb-4 font-bold lg:max-w-md" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}              >
+                className="mb-4 font-bold lg:max-w-md">
                 2. Chodzę po górach (Beskid)
               </Typography>
-              <Typography className="mb-3 w-full lg:w-8/12 font-normal !text-gray-500"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+              <Typography className="mb-3 w-full lg:w-8/12 font-normal !text-gray-500">
                 Ostatnio odkryte hobby. Lubie naładować plecak sprzętem i po prostu iść przed siebie. Tak aż nogi zaczna boleć. Lubie przy tym wziąć drona, kamerę i złapać parę fajnych dla oka ujęć.
               </Typography>
-              <Typography variant="h6" color="blue-gray" className="mb-0.5"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+              <Typography variant="h6" color="blue-gray" className="mb-0.5">
                 Pare zdjęć
               </Typography>
               <div className="flex items-center gap-4">
@@ -48,7 +48,7 @@ export function HobbyGory() {
                   alt="Avatar gory"
                   size="xl"
                   className={`cursor-pointer ${active === 1 ? "opacity-100" : "opacity-50"}`}
-                  onClick={() => setActive(1)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                />
+                  onClick={() => setActive(1)} />
                 <div className="w-[1px] h-[36px] bg-blue-gray-100"></div>
                 <Avatar
                   variant="rounded"
@@ -56,7 +56,7 @@ export function HobbyGory() {
                   alt="Avatar gory"
                   size="xl"
                   className={`cursor-pointer ${active === 2 ? "opacity-100" : "opacity-50"}`}
-                  onClick={() => setActive(2)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                />
+                  onClick={() => setActive(2)} />
                 <div className="w-[1px] h-[36px] bg-blue-gray-100" />
                 <Avatar
                   variant="rounded"
@@ -64,7 +64,7 @@ export function HobbyGory() {
                   alt="Avatar gory"
                   size="xl"
                   className={`cursor-pointer ${active === 3 ? "opacity-100" : "opacity-50"}`}
-                  onClick={() => setActive(3)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                />
+                  onClick={() => setActive(3)} />
                 <div className="w-[1px] h-[36px] bg-blue-gray-100"></div>
                 <Avatar
                   variant="rounded"
@@ -72,7 +72,7 @@ export function HobbyGory() {
                   alt="Avatar gory"
                   size="xl"
                   className={`cursor-pointer ${active === 3 ? "opacity-100" : "opacity-50"}`}
-                  onClick={() => setActive(4)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                />
+                  onClick={() => setActive(4)} />
               </div>
             </div>
 

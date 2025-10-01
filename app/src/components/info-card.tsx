@@ -6,6 +6,13 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 
+// Local any-wrappers to avoid overly-strict library prop types causing TS errors
+const CardAny: any = Card;
+const CardHeaderAny: any = CardHeader;
+const CardBodyAny: any = CardBody;
+const TypographyAny: any = Typography;
+const IconButtonAny: any = IconButton;
+
 interface InfoCardProps {
   icon: React.ElementType;
   title: string;
@@ -16,22 +23,20 @@ interface InfoCardProps {
 
 export function InfoCard({ icon: Icon, title, date, children, githubLink }: InfoCardProps) {
   return (
-    <Card placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-      <CardHeader
+    <CardAny>
+      <CardHeaderAny
         className="flex items-center justify-between rounded-none overflow-visible"
         floated={false}
         shadow={false}
-        placeholder={undefined}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined} 
+        
         >
         <div className="flex flex-col gap-1 w-full">
-          <Typography color="blue" className="font-bold text-xs" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+          <TypographyAny color="blue" className="font-bold text-xs">
             {date}
-          </Typography>
-          <Typography color="blue-gray" variant="h5" className="w-full" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+          </TypographyAny>
+          <TypographyAny color="blue-gray" variant="h5" className="w-full">
             {title}
-          </Typography>
+          </TypographyAny>
           {githubLink && (
               <a
                 href={githubLink}
@@ -46,19 +51,16 @@ export function InfoCard({ icon: Icon, title, date, children, githubLink }: Info
         <IconButton
           className="flex-shrink-0 pointer-events-none"
           ripple={false}
-          placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
         >
           <Icon className="h-5 w-5" strokeWidth={2} />
         </IconButton>
-      </CardHeader>
-      <CardBody className="grid justify-start !px-3.5 pt-2" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-        <Typography className=" font-normal !text-black-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+      </CardHeaderAny>
+      <CardBodyAny className="grid justify-start !px-3.5 pt-2">
+        <TypographyAny className=" font-normal !text-black-500">
           {children}
-        </Typography>
-      </CardBody>
-    </Card>
+        </TypographyAny>
+      </CardBodyAny>
+    </CardAny>
   );
 }
 

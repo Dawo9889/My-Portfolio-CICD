@@ -12,19 +12,19 @@ export function HobbyRower() {
     <section className="py-2 px-8 lg:py-12">
       <div className="container max-w-screen-lg mx-auto">
 
-        <Card color="transparent" shadow={false} className="py-8 lg:flex-row"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-          <CardBody className="w-full lg:gap-10 h-full lg:!flex justify-between " placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+        <Card color="transparent" shadow={false} className="py-8 lg:flex-row">
+          <CardBody className="w-full lg:gap-10 h-full lg:!flex justify-between ">
             <div className="w-full mb-10 lg:mb-0">
               <Typography
                 variant="h3"
                 color="blue-gray"
-                className="mb-4 font-bold lg:max-w-xs" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}              >
+                className="mb-4 font-bold lg:max-w-xs">
                 1. Jeżdżę na rowerze
               </Typography>
-              <Typography className="mb-3 w-full lg:w-8/12 font-normal !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+              <Typography className="mb-3 w-full lg:w-8/12 font-normal !text-gray-500">
               Niedawno kupiłem rower, a już zastanawiam się, czy nie zamienić go na model typu full suspension. Jazda po górach to dla mnie ogromna frajda (choć wjazdy nie są aż tak ekscytujące…). Natomiast zjazdy – to dopiero jest to, co uwielbiam najbardziej!
               </Typography>
-              <Typography variant="h6" color="blue-gray" className="mb-0.5" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+              <Typography variant="h6" color="blue-gray" className="mb-0.5">
                 Pare zdjęć
               </Typography>
               <div className="flex items-center gap-4">
@@ -34,7 +34,7 @@ export function HobbyRower() {
                   alt="Avatar roweru"
                   size="xl"
                   className={`cursor-pointer ${active === 1 ? "opacity-100" : "opacity-50"}`}
-                  onClick={() => setActive(1)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                
+                  onClick={() => setActive(1)}                
                   />
                 <div className="w-[1px] h-[36px] bg-blue-gray-100 "></div>
                 <Avatar
@@ -43,7 +43,7 @@ export function HobbyRower() {
                   alt="Avatar roweru"
                   size="xl"
                   className={`cursor-pointer ${active === 2 ? "opacity-100" : "opacity-50"}`}
-                  onClick={() => setActive(2)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                
+                  onClick={() => setActive(2)}                
                   />
                 <div className="w-[1px] h-[36px] bg-blue-gray-100" />
                 <Avatar
@@ -52,7 +52,7 @@ export function HobbyRower() {
                   alt="Avatar roweru"
                   size="xl"
                   className={`cursor-pointer ${active === 3 ? "opacity-100" : "opacity-50"}`}
-                  onClick={() => setActive(3)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                
+                  onClick={() => setActive(3)}                
                   />
                   <div className="w-[1px] h-[36px] bg-blue-gray-100" />
                 <Avatar
@@ -61,7 +61,7 @@ export function HobbyRower() {
                   alt="Avatar roweru"
                   size="xl"
                   className={`cursor-pointer ${active === 3 ? "opacity-100" : "opacity-50"}`}
-                  onClick={() => setActive(4)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                
+                  onClick={() => setActive(4)}                
                 />
               </div>
             </div>

@@ -235,9 +235,6 @@ export function InformationSection() {
           <Typography
             color="blue-gray"
             className="mb-2 text-3xl font-bold"
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
           >
             Projekty
           </Typography>
@@ -245,9 +242,6 @@ export function InformationSection() {
           <Typography
             variant="lead"
             className="!text-gray-500"
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
           >
             Wszystkie moje projekty, z których jestem zadowolny.
           </Typography>
@@ -264,9 +258,6 @@ export function InformationSection() {
           <Typography
             color="blue-gray"
             className="mb-2 text-3xl font-bold"
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
           >
             Doświadczenie
           </Typography>
@@ -274,9 +265,6 @@ export function InformationSection() {
           <Typography
             variant="lead"
             className="!text-gray-500"
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
           >
             Moje doświadczenie jako IT DevOps
           </Typography>
@@ -293,9 +281,6 @@ export function InformationSection() {
           <Typography
             color="blue-gray"
             className="mb-2 text-3xl font-bold"
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
           >
             Certyfikaty
           </Typography>
@@ -303,9 +288,6 @@ export function InformationSection() {
           <Typography
             variant="lead"
             className="!text-gray-500"
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
           >
             Zobacz wszystkie ważniejsze w moim życiu certyfikaty.
           </Typography>
@@ -321,9 +303,6 @@ export function InformationSection() {
           <Typography
             color="blue-gray"
             className="mb-2 text-3xl font-bold"
-            placeholder={undefined}
-            onPointerEnterCapture={() => console.log('Pointer entered')}
-            onPointerLeaveCapture={undefined}
           >
             Umięjętności
           </Typography>
@@ -331,9 +310,6 @@ export function InformationSection() {
           <Typography
             variant="lead"
             className="!text-gray-500"
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
           >
             Czyli czego nauczyłem się do tej pory
           </Typography>
@@ -346,12 +322,13 @@ export function InformationSection() {
         </div>
       </div>
       <div className="container mx-auto mt-20 text-center">
-          <Typography variant="h2" color="blue-gray" className="mb-4" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+          <Typography variant="h2" color="blue-gray" className="mb-4">
             Co robię w wolnym czasie?
           </Typography>
           <Typography
             variant="lead"
-            className="mx-auto w-full px-4 font-normal !text-gray-500 lg:w-8/12" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
+            className="mx-auto w-full px-4 font-normal !text-gray-500 lg:w-8/12"
+          >
             Wolny czas przede wszystkim staram się spędzać aktywnie. Dużo siedzę przed komputerem na studiach i w pracy także każdy ruch jest mi bardzo wskazany
           </Typography>
         </div>
