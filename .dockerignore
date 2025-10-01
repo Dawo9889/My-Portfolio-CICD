@@ -27,3 +27,12 @@ yarn-error.log
 
 build/
 dist/
+
+# Next / Docker ignores
+node_modules
+.next
+Dockerfile*
+.dockerignore
+.DS_Store
+coverage
+dist
