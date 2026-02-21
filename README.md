@@ -1,6 +1,4 @@
-﻿# My-Portfolio - Strona typu "CV" jako baza do projektu dotyczącego automatyzacji wdrażania.
-
-# SITE IS DOWN UNTIL I CAHNGE MY WHOLE HOMELAB SETUP
+# Repozytorium zarchiwizowane, nowa wersja dostępna pod linkiem: https://github.com/Dawo9889/My-Portfolio-CICD-2.0
 
 https://my-portfolio.dawo9889-homelab.lat/
 
@@ -17,4 +15,5 @@ Dokumentacja projektu znajduje się w folderze `/dokumentacja`. Znajdziesz tam s
 ## Gdyby strona nie działała to najmocniej przepraszam. Jest ona hostowana na moim własnym sprzęcie w domu i nie zawsze jest możliwość jej wysokiej dostępności. Ale za to tanio :) 
 
 ## Jednocześnie pozwolę sobie zaznaczyć, że nie jestem bardzo dobry w pisaniu frontendu, dlatego użyczyłem sobie templatke ze strony [creative-tim](https://www.creative-tim.com/product/nextjs-tailwind-resume-page)
+
 
